@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
-"""Signet Labs (ULL+HFT) brand mark + wordmark — Carbon & Cyan.
-Mark = hexagonal signet seal containing ascending signal/latency bars."""
+"""SignetStack brand mark + wordmark + shared font/geometry helpers — Carbon & Cyan.
+Mark = hexagonal signet seal containing ascending signal bars.
+Note: build_brand_family.py imports the font helpers (find_font, F, PLEX_BOLD,
+PLEX_MED) from here; the standalone lockup drawing below is not used by the site build."""
 import math, os, glob
 from PIL import Image, ImageDraw, ImageFont
 
@@ -79,15 +81,15 @@ def trim(img):
     return img.crop(bb) if bb else img
 
 def build_lockup(text_color, mark_img, descriptor_color, fname):
-    """mark on left + 'Signet Labs' wordmark + descriptor line."""
+    """mark on left + 'SignetStack Labs' wordmark + descriptor line."""
     H = 420
     wm_size = 300
     desc_size = 60
     fbold = F(PLEX_BOLD, wm_size)
     fmed  = F(PLEX_MED, desc_size)
     tmp = Image.new("RGBA", (10, 10)); td = ImageDraw.Draw(tmp)
-    word = "Signet Labs"
-    desc = "ULTRA-LOW-LATENCY  ·  HFT"
+    word = "SignetStack Labs"
+    desc = "A HOUSE OF FRONTIER-TECHNOLOGY BRANDS"
     wb = td.textbbox((0, 0), word, font=fbold)
     ww, wh = wb[2]-wb[0], wb[3]-wb[1]
     db = td.textbbox((0, 0), desc, font=fmed)

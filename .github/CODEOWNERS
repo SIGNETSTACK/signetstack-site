@@ -1,0 +1,16 @@
+# Code ownership for the SignetStack site.
+# Every change requires review by the site owner(s).
+# Replace @signetstack/web with the actual team/handle once the org is set up.
+
+*                       @signetstack/web
+
+# Content & build sources
+/assets/                @signetstack/web
+
+# CI / deploy
+/.github/               @signetstack/web
+
+# Legal & policy docs
+/LICENSE                @signetstack/web
+/TRADEMARKS.md          @signetstack/web
+/SECURITY.md            @signetstack/web

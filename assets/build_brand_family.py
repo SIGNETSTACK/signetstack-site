@@ -337,5 +337,5 @@ def family_sheet(lockups):
 
 if __name__ == "__main__":
     locks = [build_brand(b) for b in BRANDS]
-    # Architecture / house-of-brands overview is produced by build_signet_labs_master.py
+    # The house-of-brands architecture overview is maintained separately (kept out of this repo).
     print("Done. Divisions:", ", ".join(b["name"] for b in BRANDS))
