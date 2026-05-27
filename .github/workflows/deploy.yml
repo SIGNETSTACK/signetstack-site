@@ -1,0 +1,57 @@
+name: Deploy website to GitHub Pages
+
+# Rebuilds the static site from source and publishes to GitHub Pages on every
+# content change. Editors just commit a change (via the GitHub web editor or a
+# git-based CMS) and the site redeploys automatically. Access is gated by the
+# Signet Stack Ltd GitHub org (Enterprise SSO/MFA) — only org members can edit.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "website/**"
+      - "assets/build_site.py"
+      - "assets/build_brand_family.py"
+      - "assets/make_logo_signetlabs.py"
+      - ".github/workflows/deploy.yml"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install build deps
+        run: pip install pillow
+      - name: Build the static site
+        run: python assets/build_site.py
+      - name: Custom domain + disable Jekyll
+        run: |
+          echo "signetstack.io" > website/CNAME
+          touch website/.nojekyll
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: website
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

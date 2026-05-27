@@ -1,0 +1,40 @@
+# ── This repo tracks ONLY the website + its build scripts ──
+# Everything else (board decks, executive summaries, brand kits, exec-comm
+# source docs) stays local and is NEVER committed.
+
+# OS / caches / deps
+.DS_Store
+node_modules/
+__pycache__/
+*.pyc
+
+# Confidential / investor deliverables — never in the repo
+*.pptx
+*.pdf
+*.docx
+
+# Brand kits & generated brand imagery (not needed by the site)
+*_Brand_Kit/
+Signet_Stack_Brand_Family.png
+SignetStack_Labs_Brand_Architecture.png
+_archived_brand_versions/
+
+# HFT executive-communication source docs (confidential)
+0*-*.md
+
+# Non-site build scripts + their local assets (deck/summary/logo generators)
+assets/build_deck*.js
+assets/build_summary*.js
+assets/build_summary*.py
+assets/build_brand_kit.py
+assets/build_brand_family.py.bak
+assets/make_logo.py
+assets/*.png
+assets/*.svg
+assets/*.html
+assets/package.json
+assets/package-lock.json
+
+# brand-kit generators (not needed to build the site)
+assets/build_signet_labs_master.py
+assets/build_signet_labs_standalone.py
