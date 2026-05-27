@@ -8,6 +8,11 @@ node_modules/
 __pycache__/
 *.pyc
 
+# Stray node tooling artifacts at repo root (not part of the static site)
+/package.json
+/pnpm-lock.yaml
+/package-lock.json
+
 # Confidential / investor deliverables — never in the repo
 *.pptx
 *.pdf

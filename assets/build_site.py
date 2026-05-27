@@ -280,8 +280,7 @@ def write_marks():
     # favicon-ish: copy master rounded icon if present
     src = os.path.join(ROOT, "SignetStack_Labs_Master_Brand_Kit", "icons", "favicon-256.png")
     if os.path.exists(src): shutil.copy(src, os.path.join(A, "img", "favicon.png"))
-    poster = os.path.join(ROOT, "SignetStack_Labs_Brand_Architecture.png")
-    if os.path.exists(poster): shutil.copy(poster, os.path.join(A, "img", "brand-architecture.png"))
+    # (brand architecture is now a responsive CSS diagram — arch_diagram(); no poster PNG)
     # real Signetify brand SVGs (source of truth in ~/Downloads)
     dl = os.path.expanduser("~/Downloads")
     for src_name, dst in [("signetify.svg", "signetify-logo.svg"), ("FAVICON signetify.svg", "signetify-icon.svg")]:
@@ -306,13 +305,13 @@ p.lead{font-size:clamp(1.05rem,1.6vw,1.3rem);color:var(--mut)}
 section{padding:72px 0}
 .muted{color:var(--mut)}
 /* header */
-header.nav{position:sticky;top:0;z-index:50;background:rgba(11,15,20,.78);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+header.nav{position:sticky;top:0;z-index:50;background:rgba(11,15,20,.9);backdrop-filter:blur(14px) saturate(1.1);border-bottom:1px solid var(--line)}
 .nav .wrap{display:flex;align-items:center;gap:28px;height:68px}
 .brandlogo{display:flex;align-items:center;gap:11px;font-weight:700;font-size:1.12rem;letter-spacing:-.01em}
 .brandlogo svg{width:30px;height:34px}
 .navlinks{display:flex;align-items:center;gap:24px;margin-left:auto}
-.navlinks a{font-size:.95rem;color:var(--mut);transition:color .15s}
-.navlinks a:hover,.navlinks a.active{color:var(--ink)}
+.navlinks a:not(.btn){font-size:.95rem;color:var(--platinum);font-weight:500;transition:color .15s}
+.navlinks a:not(.btn):hover,.navlinks a:not(.btn).active{color:var(--ink)}
 .dropdown{position:relative}
 .dropdown>a::after{content:'▾';font-size:.7em;margin-left:5px;color:var(--mut2)}
 .menu{position:absolute;top:130%;left:50%;transform:translateX(-50%) translateY(6px);background:var(--slate);border:1px solid var(--line);border-radius:12px;padding:8px;min-width:230px;opacity:0;visibility:hidden;transition:.16s;box-shadow:0 18px 40px rgba(0,0,0,.4)}
@@ -322,8 +321,8 @@ header.nav{position:sticky;top:0;z-index:50;background:rgba(11,15,20,.78);backdr
 .menu a svg{width:20px;height:22px;flex:0 0 20px}
 .menu .dom{color:var(--mut2);font-size:.78rem}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:11px 20px;border-radius:10px;font-weight:600;font-size:.95rem;transition:.15s;cursor:pointer;border:1px solid transparent}
-.btn-primary{background:var(--accent);color:#0B0F14}
-.btn-primary:hover{filter:brightness(1.08)}
+.btn-primary{background:var(--accent);color:#0B0F14;font-weight:700;box-shadow:0 2px 14px rgba(0,0,0,.25)}
+.btn-primary:hover{filter:brightness(1.06)}
 .btn-ghost{border-color:var(--line);color:var(--ink)}
 .btn-ghost:hover{border-color:var(--accent);color:var(--accent-bright)}
 .navtoggle{display:none;margin-left:auto;background:none;border:1px solid var(--line);border-radius:8px;color:var(--ink);font-size:1.3rem;width:42px;height:38px}
@@ -333,8 +332,28 @@ header.nav{position:sticky;top:0;z-index:50;background:rgba(11,15,20,.78);backdr
 .hero h1{max-width:16ch;margin:.2em 0 .35em}
 .hero p.lead{max-width:60ch}
 .hero .cta{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
-.heromark{position:absolute;right:-90px;top:-40px;width:520px;opacity:.05;pointer-events:none}
-.heromark svg{width:100%}
+.heromark{position:absolute;right:4%;top:50%;transform:translateY(-50%);width:360px;max-width:32vw;opacity:.08;pointer-events:none}
+.heromark svg{width:100%;display:block}
+/* brand-architecture diagram */
+.archd{--tick:var(--line);width:100%}
+.archd .arch-master{display:flex;justify-content:center}
+.archd .an-master{text-align:center;border:1px solid var(--line);border-radius:14px;background:linear-gradient(180deg,var(--slate),var(--carbon2));padding:18px 26px;min-width:240px}
+.archd .an-master .an-mark{width:30px;height:34px;vertical-align:middle;margin-right:9px}
+.archd .an-master .an-name{display:inline-block;font-weight:700;font-size:1.18rem;letter-spacing:-.01em;color:var(--ink);vertical-align:middle}
+.archd .arch-stem{height:22px;width:2px;background:var(--tick);margin:0 auto}
+.archd .arch-bus{height:2px;background:var(--tick);margin:0 auto;width:min(80%,640px)}
+.archd .arch-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:0}
+.archd .arch-node{position:relative;flex:1 1 150px;max-width:210px;margin-top:22px;background:var(--carbon2);border:1px solid var(--line);border-top:3px solid var(--c);border-radius:12px;padding:16px 16px 18px;text-align:center}
+.archd .arch-node::before{content:"";position:absolute;top:-22px;left:50%;transform:translateX(-50%);width:2px;height:22px;background:var(--tick)}
+.archd .arch-node .an-name{font-weight:700;font-size:1rem;color:var(--ink);line-height:1.25}
+.archd .arch-node .an-kick{font-size:.72rem;font-weight:600;letter-spacing:.6px;text-transform:uppercase;color:var(--c);margin-top:7px;line-height:1.3}
+.archd .arch-node .an-desc{font-size:.82rem;color:var(--mut);margin-top:9px;line-height:1.45}
+.archd .an-hl{box-shadow:0 0 0 1px var(--c),0 14px 30px rgba(0,0,0,.35);background:var(--slate)}
+.archd .an-sister{border-style:dashed;opacity:.96}
+.archd .an-sister::before{background-image:linear-gradient(var(--tick) 50%,transparent 0);background-size:2px 6px;background-color:transparent}
+.archd .an-tag{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--mut2);border:1px solid var(--line);border-radius:6px;padding:2px 7px;margin-bottom:9px}
+.archd .arch-cap{text-align:center;color:var(--mut2);font-size:.82rem;margin-top:20px}
+@media(max-width:680px){.archd .arch-bus{display:none}.archd .arch-node{flex-basis:100%;max-width:none}.archd .arch-node::before{display:none}.archd .arch-stem{height:14px}.archd .arch-row{gap:12px}}
 /* grids & cards */
 .grid{display:grid;gap:20px}
 .g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:repeat(2,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
@@ -432,6 +451,8 @@ footer a{color:var(--mut);font-size:.92rem}footer a:hover{color:var(--ink)}
  .g3,.g4,.g2,.split,.fgrid,.statrow{grid-template-columns:1fr}
  .sister{flex-direction:column;text-align:center}
  .split{gap:28px}
+ .heromark{display:none}
+ .navlinks a.btn{margin-top:4px}
 }
 """
 
@@ -506,6 +527,29 @@ def brand_card(slug):
 <h3>{d['name']}™</h3><div class="dom">{d['kicker']}</div>
 <p>{d['tagline']}</p><div class="more">Explore {d['domain']} →</div></a>"""
 
+def arch_diagram(highlight=None):
+    """Responsive CSS house-of-brands diagram (replaces the legacy PNG poster)."""
+    def node(name, kick, desc, color, slug=None, sister=False):
+        hl = " an-hl" if slug and slug == highlight else ""
+        sis = " an-sister" if sister else ""
+        tag = '<span class="an-tag">Sister company</span>' if sister else ""
+        return (f'<div class="arch-node{sis}{hl}" style="--c:{color}">{tag}'
+                f'<div class="an-name">{name}</div><div class="an-kick">{kick}</div>'
+                f'<div class="an-desc">{desc}</div></div>')
+    children = (
+        node(PLATFORM['short'], "The platform", "Post-quantum data-trust platform &amp; its modules.", PA, slug="platform")
+        + node("SignetStack Velocity™", DIV['velocity']['kicker'], "Microsecond execution — HFT V5 Omni.", DIV['velocity']['accent'], slug="velocity")
+        + node("SignetStack DXP™", DIV['dxp']['kicker'], "Composable, agent-first experience platform.", DIV['dxp']['accent'], slug="dxp")
+        + node(f"{SISTER['name']}™", "No-code · signetify.com", SISTER['tagline'], SISTER['accent'], sister=True)
+    )
+    sub = "color:var(--mut2);font-size:.72rem;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:8px"
+    return (f'<div class="archd"><div class="arch-master"><div class="an-master">'
+            f'<svg class="an-mark">{{master-white}}</svg><span class="an-name">SignetStack&nbsp;Labs™</span>'
+            f'<div style="{sub}">Master brand · one proven core</div></div></div>'
+            f'<div class="arch-stem"></div><div class="arch-bus"></div>'
+            f'<div class="arch-row">{children}</div>'
+            f'<div class="arch-cap">One neutral master brand — the Signet Data Trust Network Platform, specialist brands &amp; sister Signetify, all on one post-quantum core.</div></div>')
+
 # ---------------- PAGES ----------------
 def build():
     write_marks()
@@ -537,7 +581,7 @@ def build():
 <h2>HFT V5 Omni™</h2><p class="lead" style="margin:.5em 0 1em">A production, institutional-grade high-frequency trading engine — live with real capital for eighteen months.</p>
 <div class="statrow">{vstat}</div>
 <div class="cta" style="margin-top:26px"><a class="btn btn-ghost" href="v5-omni.html">See the engine →</a></div></div>
-<div><img class="feature-img" src="assets/img/brand-architecture.png" alt="SignetStack Labs brand architecture"></div>
+<div>{arch_diagram(highlight="velocity")}</div>
 </div></div></section>
 <section><div class="wrap"><div class="sec-head"><div class="kick">Insights</div><h2>From the workshop</h2></div>
 <div class="grid g3">{ins_cards}</div></div></section>
@@ -553,7 +597,7 @@ def build():
 <div><div class="kick">The model</div><h2>One core, many products</h2>
 <p class="lead" style="margin-top:.6em">The expensive, precision-engineered part — cryptography, safety, provability, operational maturity — never gets rebuilt. Each product is a specialist application of the same proven foundation, the way you swap the head on a precision tool but never the motor.</p>
 <p class="muted" style="margin-top:1em">The Signet Data Trust Network Platform proves what happened to regulated data; SignetStack Velocity brings the same rigour to ultra-low-latency trading; SignetStack DXP to digital experience; and our sister product Signetify makes it approachable as no-code. More will follow — each on the same core.</p></div>
-<div><img class="feature-img" src="assets/img/brand-architecture.png" alt="Brand architecture"></div></div></div></section>
+<div>{arch_diagram()}</div></div></div></section>
 <section><div class="wrap"><div class="sec-head"><div class="kick">Principles</div><h2>How we operate</h2></div>
 <div class="grid g3">
 <div class="cap"><div class="dot">01</div><h4>Build the hard part once</h4><p>Shared, proven engineering — never rebuilt per market.</p></div>
@@ -640,7 +684,7 @@ def build():
             flagship = f"""<section class="band"><div class="wrap"><div class="split">
 <div><div class="kick">Flagship product</div><h2>HFT V5 Omni™</h2><p class="lead" style="margin:.5em 0 1em">The engine behind Velocity — watch, decide, act and learn, inside a hard safety perimeter, live with real money for eighteen months.</p>
 <a class="btn btn-primary" href="v5-omni.html">Explore HFT V5 Omni →</a></div>
-<div><img class="feature-img" src="assets/img/brand-architecture.png" alt="architecture"></div></div></div></section>"""
+<div>{arch_diagram(highlight="velocity")}</div></div></div></section>"""
         aud = "".join(f'<div>{a}</div>' for a in d.get("audience", []))
         aud_sec = f'<section><div class="wrap"><div class="sec-head"><div class="kick">Who it\'s for</div><h2>Built for the people who carry the risk</h2></div><div class="aud">{aud}</div></div></section>' if d.get("audience") else ""
         diffs = "".join(f'<div class="cap"><div class="dot">◆</div><h4>{t}</h4><p>{p}</p></div>' for t, p in d.get("diffs", []))
