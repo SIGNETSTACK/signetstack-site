@@ -23,7 +23,7 @@ DIV = {  # slug -> enriched page data, sourced from each project's docs (public-
  "velocity": {"key": "signetstack-velocity", "name": "SignetStack Velocity", "domain": "Velocity",
    "kicker": "Ultra-Low-Latency · HFT", "accent": "#12C2C9", "bright": "#16E0D4", "deep": "#0B7C82",
    "tagline": "Microsecond execution, built to be trusted with real capital.",
-   "overview": "SignetStack Velocity builds production, institutional-grade trading and liquidity technology. Its flagship engine, HFT V5 Omni, watches multiple venues in microseconds, decides with a layered statistical, machine-learning and Bayesian stack, executes inside a hard safety perimeter, and learns from every outcome — live with real money for eighteen months, and architected to extend across asset classes.",
+   "overview": "SignetStack Velocity builds production, institutional-grade trading and liquidity technology. Its flagship engine, HFT V5 Omni, watches multiple venues in microseconds, decides with a layered statistical, machine-learning and Bayesian stack, executes inside a hard safety perimeter, and learns from every outcome — running live on real money for eighteen months across five generations, with today's V5 in production for the last eight, and architected to extend across asset classes.",
    "caps": [("Microsecond speed","Quote-to-decision in single-digit microseconds end to end, using kernel-bypass networking and lock-free, CPU-pinned engineering found only in tier-1 firms."),
             ("Safe self-learning","A closed feedback loop scores its own predictions and recalibrates continuously — with guardrails that are harder to build than the learning itself."),
             ("Structural safety","An 18-trigger circuit breaker, a dead-man's switch and continuous capital reconciliation halt trouble automatically. It stops itself rather than press on."),
@@ -34,8 +34,8 @@ DIV = {  # slug -> enriched page data, sourced from each project's docs (public-
    "diffs": [("The moat is the combination","Any one capability exists somewhere; assembling microsecond speed, safe learning, structural safety and multi-asset extensibility in one live system takes a specialist team years."),
              ("Never custodies funds","Capital stays in the institution's own venue accounts; the access granted cannot move money off-exchange and can be revoked instantly."),
              ("Measured, not modelled","Latency and safety are demonstrable on demand with real orders and a standing test suite — not back-tested claims.")],
-   "tags": [], "status": "Live in production for eighteen months across multiple cryptocurrency venues, with zero capital loss attributable to a software defect. The multi-asset roadmap (FX → equities → commodities → indices) extends the proven core rather than rebuilding it.",
-   "stats": [("18 mo","continuous live, real-money operation"),("~9 µs","median decision latency"),
+   "tags": [], "status": "The engine has run live on real money for eighteen months across five generations and multiple cryptocurrency venues, with zero capital loss attributable to a software defect; the current generation, V5, has been in production for the last eight. The multi-asset roadmap (FX → equities → commodities → indices) extends the proven core rather than rebuilding it.",
+   "stats": [("18 mo","live on real money · V1→V5"),("~9 µs","median decision latency"),
              ("1,971","tests · 0 failures · 4 safety tools"),("$0","defect-attributable capital loss")],
    "flagship": True},
  "pqc": {"key": "signetstack-pqc", "name": "SignetStack PQC", "domain": "PQC",
@@ -636,7 +636,7 @@ def build():
 </div></section>
 <section class="band"><div class="wrap"><div class="split">
 <div><div class="kick" style="color:{DIV['velocity']['deep']}">Flagship · SignetStack Velocity</div>
-<h2>HFT V5 Omni™</h2><p class="lead" style="margin:.5em 0 1em">A production, institutional-grade high-frequency trading engine — live with real capital for eighteen months.</p>
+<h2>HFT V5 Omni™</h2><p class="lead" style="margin:.5em 0 1em">A production, institutional-grade high-frequency trading engine — the fifth generation of a platform run live on real capital for eighteen months, with V5 itself in production for the last eight.</p>
 <div class="statrow">{vstat}</div>
 <div class="cta" style="margin-top:26px"><a class="btn btn-ghost" href="v5-omni.html">See the engine →</a></div></div>
 <div>{arch_diagram(highlight="velocity")}</div>
@@ -740,7 +740,7 @@ def build():
         flagship = ""
         if d.get("flagship"):
             flagship = f"""<section class="band"><div class="wrap"><div class="split">
-<div><div class="kick">Flagship product</div><h2>HFT V5 Omni™</h2><p class="lead" style="margin:.5em 0 1em">The engine behind Velocity — watch, decide, act and learn, inside a hard safety perimeter, live with real money for eighteen months.</p>
+<div><div class="kick">Flagship product</div><h2>HFT V5 Omni™</h2><p class="lead" style="margin:.5em 0 1em">The engine behind Velocity — watch, decide, act and learn, inside a hard safety perimeter, live on real money for eighteen months across five generations (V5 for the last eight).</p>
 <a class="btn btn-primary" href="v5-omni.html">Explore HFT V5 Omni →</a></div>
 <div>{arch_diagram(highlight="velocity")}</div></div></div></section>"""
         aud = "".join(f'<div>{a}</div>' for a in d.get("audience", []))

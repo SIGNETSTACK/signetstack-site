@@ -20,7 +20,7 @@ BRANDS = [
      "accent": "#12C2C9", "bright": "#16E0D4", "deep": "#0B7C82", "glyph": "bars",
      "folder": "SignetStack_Velocity_Brand_Kit", "accent_name": "Cyan",
      "tagline": "Ultra-Low-Latency & High-Frequency Trading",
-     "chip_style": "metric", "chips": [("18 mo", "live"), ("~9 µs", "decision"), ("1,971", "tests · 0 fail"), ("$0", "defect loss")]},
+     "chip_style": "metric", "chips": [("18 mo", "live · V1→V5"), ("~9 µs", "decision"), ("1,971", "tests · 0 fail"), ("$0", "defect loss")]},
     {"key": "signetstack-pqc", "name": "SignetStack PQC", "desc": "POST-QUANTUM CRYPTOGRAPHY",
      "accent": "#8B5CF6", "bright": "#A78BFA", "deep": "#5B3FC0", "glyph": "lattice",
      "folder": "SignetStack_PQC_Brand_Kit", "accent_name": "Quantum Violet",
@@ -212,7 +212,8 @@ def brand_sheet(b, KIT, lk_dark, lk_light):
     A = hx2rgba(b["accent"]); Br = hx2rgba(b["bright"]); Dp = hx2rgba(b["deep"]); glyph = b["glyph"]
     W, H = 2000, 1414; img = Image.new("RGBA", (W, H), rgb(LIGHT) + (255,)); d = ImageDraw.Draw(img)
     d.rectangle([0, 0, W, 250], fill=rgb(CARBON) + (255,))
-    hd = trim(lk_dark); s = 150 / hd.height; img.alpha_composite(hd.resize((int(hd.width * s), 150), Image.LANCZOS), (90, 50))
+    hd = trim(lk_dark); s = min(150 / hd.height, 1230 / hd.width); hw, hh = int(hd.width * s), int(hd.height * s)
+    img.alpha_composite(hd.resize((hw, hh), Image.LANCZOS), (90, 50 + (150 - hh) // 2))
     d.text((W - 600, 95), "BRAND ASSET SHEET", font=F(PLEX_MED, 34), fill=rgb(Br) + (255,))
     d.text((W - 600, 140), b["name"] + " · a SignetStack Labs company", font=F(PLEX_MED, 24), fill=rgb(MUTED) + (255,))
     fsec = F(PLEX_BOLD, 30); fsm = F(PLEX_MED, 24); fmono = F(PLEX_MONO, 22)
@@ -220,9 +221,11 @@ def brand_sheet(b, KIT, lk_dark, lk_light):
         d.text((x, y), label.upper(), font=fsec, fill=rgb(Dp) + (255,)); d.line([x, y + 44, x + 380, y + 44], fill=rgb(A) + (255,), width=3)
     section(90, 320, "Logo — primary lockup")
     d.rounded_rectangle([90, 380, 950, 600], radius=14, fill=rgb(CARBON) + (255,))
-    a = trim(lk_dark); s = 150 / a.height; img.alpha_composite(a.resize((int(a.width * s), 150), Image.LANCZOS), (130, 405))
+    a = trim(lk_dark); s = min(150 / a.height, 780 / a.width); aw, ah = int(a.width * s), int(a.height * s)
+    img.alpha_composite(a.resize((aw, ah), Image.LANCZOS), (90 + (860 - aw) // 2, 380 + (220 - ah) // 2))
     d.rounded_rectangle([90, 620, 950, 840], radius=14, outline=rgb(MUTED) + (255,), width=2, fill=(255, 255, 255, 255))
-    bb = trim(lk_light); s = 150 / bb.height; img.alpha_composite(bb.resize((int(bb.width * s), 150), Image.LANCZOS), (130, 645))
+    bb = trim(lk_light); s = min(150 / bb.height, 780 / bb.width); bw, bh = int(bb.width * s), int(bb.height * s)
+    img.alpha_composite(bb.resize((bw, bh), Image.LANCZOS), (90 + (860 - bw) // 2, 620 + (220 - bh) // 2))
     section(90, 900, "Mark")
     specs = [(CARBON, A, Br), (A, CARBON, CARBON), (LIGHT, A, Br)]
     mx = 90
@@ -320,17 +323,18 @@ Clear space ≥ the mark height · minimum lockup 24px · use onDark on dark, on
 
 # ---------------- FAMILY OVERVIEW ----------------
 def family_sheet(lockups):
-    W, H = 2000, 1200; img = Image.new("RGBA", (W, H), rgb(CARBON) + (255,)); d = ImageDraw.Draw(img)
+    n = len(BRANDS); W, H = 180 + 460 * n, 1200; img = Image.new("RGBA", (W, H), rgb(CARBON) + (255,)); d = ImageDraw.Draw(img)
     d.text((90, 70), "SIGNET STACK LTD", font=F(PLEX_BOLD, 52), fill=rgb(LIGHT) + (255,))
-    d.text((92, 140), "Brand family — one signet seal, four domains", font=F(PLEX_MED, 30), fill=rgb(MUTED) + (255,))
+    d.text((92, 140), f"Brand family — one signet seal, {n} specialist domains", font=F(PLEX_MED, 30), fill=rgb(MUTED) + (255,))
     d.line([90, 210, W - 90, 210], fill=(40, 54, 66, 255), width=3)
-    cw = (W - 180) // 4
+    cw = (W - 180) // n
     for i, b in enumerate(BRANDS):
         A = hx2rgba(b["accent"]); Br = hx2rgba(b["bright"]); x = 90 + i * cw
         d.line([x + 20, 250, x + 20, H - 120], fill=(34, 46, 56, 255), width=2) if i else None
         mk = trim(draw_mark(560, A, A, Br, b["glyph"])); mh = 300; mk = mk.resize((int(mk.width * mh / mk.height), mh), Image.LANCZOS)
         img.alpha_composite(mk, (x + cw // 2 - mk.width // 2, 300))
-        d.text((x + cw // 2, 660), b["name"], font=F(PLEX_BOLD, 36), fill=rgb(LIGHT) + (255,), anchor="ma")
+        d.text((x + cw // 2, 636), "SignetStack", font=F(PLEX_MED, 24), fill=rgb(MUTED) + (255,), anchor="ma")
+        d.text((x + cw // 2, 672), b["name"].replace("SignetStack ", ""), font=F(PLEX_BOLD, 36), fill=rgb(LIGHT) + (255,), anchor="ma")
         # wrap desc
         dsc = b["desc"].replace("  ·  ", "\n").replace(" · ", "\n")
         for j, line in enumerate(dsc.split("\n")):
