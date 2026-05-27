@@ -36,6 +36,11 @@ BRANDS = [
      "folder": "SignetStack_DXP_Brand_Kit", "accent_name": "Coral",
      "tagline": "Composable digital experience platform",
      "chip_style": "tag", "chips": ["Composable", "Personalized", "Omnichannel"]},
+    {"key": "signetstack-rnd", "name": "SignetStack R&D", "desc": "RESEARCH & ADVANCED DEVELOPMENT",
+     "accent": "#10B981", "bright": "#34D399", "deep": "#0A6E50", "glyph": "lattice",
+     "folder": "SignetStack_RnD_Brand_Kit", "accent_name": "Emerald",
+     "tagline": "Cryptography research & advanced development",
+     "chip_style": "tag", "chips": ["Post-quantum", "Crypto-agile", "Proof-first"]},
 ]
 
 # ---------------- MARK (hexagon seal + glyph) ----------------

@@ -95,8 +95,50 @@ DIV = {  # slug -> enriched page data, sourced from each project's docs (public-
    "tags": ["Headless / API-first","GDPR (consent & erasure)","Designed for SOC 2 alignment","Designed for ISO 27001 alignment","BYOK","Post-quantum ready"],
    "status": "Pre-GA — available for design partners and early access. The platform is a working, multi-module implementation across content, commerce, AI, search and agents; formal SOC 2 / ISO 27001 certification, and some generative/voice and real-time features, are on the roadmap.",
    "stats": [], "flagship": False},
+ "research": {"key": "signetstack-rnd", "name": "SignetStack R&D", "domain": "R&D",
+   "kicker": "Research & Advanced Development", "accent": "#10B981", "bright": "#34D399", "deep": "#0A6E50",
+   "tagline": "The innovation arm of SignetStack Labs — where the hardest cryptography, agentic AI and the future of the web are invented, and proven before they ship.",
+   "overview": "SignetStack R&D is the innovation, research and advanced-development arm of SignetStack Labs — where the hardest problems are invented around before they are productised. Its proven output today is the post-quantum, hardware-adaptive cryptographic core that every Signet product inherits — from the Signet Data Trust Network Platform to SignetStack Velocity. Its frontier reaches into agentic AI, multimodal generation and the future of the web. The method never changes: nothing graduates on a claim — every result is run through the Signet Observatory as a reproducible, tamper-evident proof before it reaches production.",
+   "caps": [("Post-quantum & crypto-agility","Backend-agnostic post-quantum cryptography — ML-KEM, ML-DSA and SLH-DSA behind a stable interface, so adopting a new NIST-standardized library or algorithm is an additive change, never a re-architecture, and never invalidates historical records."),
+            ("Standards & validation research","Novel approaches to validating hybrid classical + post-quantum cryptographic modules to FIPS 140-3 / CMVP across multiple hardware and OS targets from a single codebase. Validation is in preparation — not yet certified."),
+            ("Hardware-adaptive, accelerated crypto","Secure, AI-native cryptographic compute that adapts across CPU SIMD paths (AES-NI, ARMv8) and GPU backends — choosing the fastest safe path for the workload without changing the security model."),
+            ("Cryptography at the web & edge boundary","Novel patterns for safe GPU-accelerated cryptography across the browser/WASM trust boundary and on constrained edge devices — designed so key material never crosses the boundary, with a tamper-evident trail for everything that does."),
+            ("Proof, not promises — the Signet Observatory","An experiment control plane that runs reproducible proof experiments across cryptography, machine learning, agents, trust and performance, with hash-chained, tamper-evident results anyone can inspect.")],
+   "frontiers": [
+     {"name": "Cryptography", "tag": "Quantum-safe, end to end.", "items": [
+        ("Hybrid post-quantum transport", "TLS 1.3 hybrid key exchange — classical X25519 combined with ML-KEM — so connections resist <em>harvest-now, decrypt-later</em> attacks, with graceful fallback for legacy peers.", False),
+        ("Quantum-safe identity &amp; credentials", "Decentralised identifiers and verifiable credentials signed with post-quantum signatures, with privacy-preserving selective disclosure — including verifiable identity for autonomous agents.", False),
+        ("Post-quantum supply-chain attestation", "Quantum-resistant signing of software bills-of-materials with transparency logging, so provenance stays verifiable across decade-long lifecycles.", False),
+        ("Long-term crypto-agile archival", "Algorithm-agnostic re-encryption and epoch re-keying for multi-decade retention — today's records survive tomorrow's standards.", False),
+        ("Quantum key distribution &amp; PQ ledgers", "Physics-based key distribution as a future key source (post-quantum cryptography always the fallback), and a quantum-native, Byzantine-fault-tolerant ledger for tamper-evident governance records.", True)]},
+     {"name": "Autonomous &amp; interpretable AI", "tag": "Autonomy you can audit.", "items": [
+        ("AI as a supervisory safety layer", "Language-model agents acting as a deliberative risk and governance layer — never on the latency-critical path — interpreting context and enforcing policy.", False),
+        ("Glass-box interpretability", "Instrumenting every decision so its full reasoning trace — attributions, context and counterfactuals — can be inspected and explained: from <em>trust it</em> to <em>audit it</em>.", False),
+        ("Generative digital-twin rehearsal", "High-fidelity generative simulations that rehearse strategies and policies across thousands of synthetic scenarios — including crises — before anything touches production.", False),
+        ("Causal inference &amp; collective learning", "Reasoning about interventions and counterfactuals rather than mere correlation, and privacy-preserving federated learning so a fleet improves together by sharing model updates, never raw data.", False),
+        ("Constitutional governance &amp; safe autonomy", "Machine-enforceable, version-controlled policy with human amendment and override, plus scoped, sandboxed, human-reviewed self-improvement — every autonomous capability with explicit escape hatches.", False),
+        ("Autonomous economic agents", "Long-horizon research into AI that operates as a governed legal-economic entity, and secure agent-to-agent settlement protocols.", True)]},
+     {"name": "Experience &amp; the future web", "tag": "Invent the site — don't template it.", "items": [
+        ("Multimodal design ingestion", "Turning a screenshot, a screen recording, a wireframe or a design file into a working, production-ready site through vision-model decomposition.", False),
+        ("Agentic web operations", "Bounded, human-overridable AI agents that build, run and operate a site — autonomy without losing accountability.", False),
+        ("Adaptive composition &amp; personalization", "Every design and content choice treated as a learned, evidence-weighted decision, with experiences that improve in real time from engagement signals.", False),
+        ("Immersive &amp; generative experience", "3D and spatial interfaces, generative and data-driven visuals, motion and gamification as first-class design primitives.", False),
+        ("Native retrieval — Signet RAG", "Retrieval-augmented generation grounded in verifiable, provenance-tracked data — answers you can trace.", False)]},
+     {"name": "Scale &amp; production hardening", "tag": "Built to grow without surprises.", "items": [
+        ("Staged capacity engineering", "Composable scaling — horizontal compute, read replicas, connection pooling, hot-path caching and columnar analytics — that grows throughput predictably while keeping latency low.", False),
+        ("Metric-driven autoscaling", "Precise, measurable thresholds that turn capacity decisions into observable, predetermined actions rather than guesswork.", False),
+        ("Purpose-built event storage", "High-ingest, columnar time-series storage for extreme-scale event workloads.", False),
+        ("Open, secure substrate", "Durable workflow orchestration, unified observability and a zero-trust, defence-in-depth posture built on open standards.", False)]}],
+   "audience": [],
+   "diffs": [("Proof-first, not paper-first","Every result is reproduced as a verifiable, hash-chained experiment before it ships — research you can independently re-run, not claims you have to take on trust."),
+             ("Built once, inherited everywhere","R&D output isn't a demo; it lands in the shared cryptographic core that the platform and every Signet brand are built on."),
+             ("Honest about maturity","We separate what's proven, what's in preparation, and what's still on the bench — and we never claim a certification we don't hold.")],
+   "tags": ["NIST FIPS 203 — ML-KEM","FIPS 204 — ML-DSA","FIPS 205 — SLH-DSA","FIPS 140-3 — in preparation","Hybrid classical + PQ","Crypto-agile by design"],
+   "status": "SignetStack R&D is an active research function, not a product you buy — its outputs ship inside Signet products as they mature. Post-quantum primitives (ML-KEM, ML-DSA, SLH-DSA) and hardware-adaptive cryptography are implemented and exercised today; FIPS 140-3 / CMVP validation is in preparation and not yet certified; the GPU/AI-accelerated and web/edge crypto-safety tracks are at research-to-hardening stage.",
+   "stats": [("3","NIST PQC standards in use — ML-KEM, ML-DSA, SLH-DSA"),("4","active research tracks"),("CPU · GPU · edge","hardware-adaptive crypto targets"),("Proof-first","reproducible, hash-chained results")],
+   "flagship": False},
 }
-ORDER = ["velocity", "dxp"]   # SignetStack product brands (besides the platform)
+ORDER = ["velocity", "dxp", "research"]   # SignetStack product brands (besides the platform)
 SIGNETIFY_URL = "https://signetify.com"
 
 # ---- The Signet Data Trust Network Platform (canonical, from SDTNP) ----
@@ -354,6 +396,13 @@ header.nav{position:sticky;top:0;z-index:50;background:rgba(11,15,20,.9);backdro
 .archd .an-tag{display:inline-block;font-size:.62rem;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--mut2);border:1px solid var(--line);border-radius:6px;padding:2px 7px;margin-bottom:9px}
 .archd .arch-cap{text-align:center;color:var(--mut2);font-size:.82rem;margin-top:20px}
 @media(max-width:680px){.archd .arch-bus{display:none}.archd .arch-node{flex-basis:100%;max-width:none}.archd .arch-node::before{display:none}.archd .arch-stem{height:14px}.archd .arch-row{gap:12px}}
+/* future-directions frontiers */
+.frontier{margin-top:34px}
+.frontier:first-of-type{margin-top:6px}
+.frontier-head{display:flex;align-items:baseline;gap:14px;flex-wrap:wrap;border-left:3px solid var(--accent);padding-left:14px;margin-bottom:18px}
+.frontier-head h3{font-size:1.18rem}
+.frontier-head p{font-size:.92rem;margin:0}
+.xtag{display:inline-block;font-size:.58rem;font-weight:700;letter-spacing:.7px;text-transform:uppercase;color:var(--accent-bright);border:1px solid var(--accent-deep);border-radius:5px;padding:1px 6px;vertical-align:middle;margin-left:7px}
 /* grids & cards */
 .grid{display:grid;gap:20px}
 .g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:repeat(2,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
@@ -548,6 +597,7 @@ def arch_diagram(highlight=None):
         node(PLATFORM['short'], "The platform", "Post-quantum data-trust platform &amp; its modules.", PA, slug="platform")
         + node("SignetStack Velocity™", DIV['velocity']['kicker'], "Microsecond execution — HFT V5 Omni.", DIV['velocity']['accent'], slug="velocity")
         + node("SignetStack DXP™", DIV['dxp']['kicker'], "Composable, agent-first experience platform.", DIV['dxp']['accent'], slug="dxp")
+        + node("SignetStack R&amp;D™", DIV['research']['kicker'], "Cryptography research — invented &amp; proven here.", DIV['research']['accent'], slug="research")
         + node(f"{SISTER['name']}™", "No-code · signetify.com", SISTER['tagline'], SISTER['accent'], sister=True)
     )
     sub = "color:var(--mut2);font-size:.72rem;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:8px"
@@ -697,6 +747,14 @@ def build():
         aud_sec = f'<section><div class="wrap"><div class="sec-head"><div class="kick">Who it\'s for</div><h2>Built for the people who carry the risk</h2></div><div class="aud">{aud}</div></div></section>' if d.get("audience") else ""
         diffs = "".join(f'<div class="cap"><div class="dot">◆</div><h4>{t}</h4><p>{p}</p></div>' for t, p in d.get("diffs", []))
         diff_sec = f'<section class="band"><div class="wrap"><div class="sec-head"><div class="kick">Why it\'s different</div><h2>Hard to replicate, by design</h2></div><div class="grid g3">{diffs}</div></div></section>' if d.get("diffs") else ""
+        fr_html = ""
+        for fr in d.get("frontiers", []):
+            cards = ""
+            for t, p, expl in fr["items"]:
+                badge = ' <span class="xtag">Exploratory</span>' if expl else ''
+                cards += f'<div class="cap"><div class="dot">→</div><h4>{t}{badge}</h4><p>{p}</p></div>'
+            fr_html += f'<div class="frontier"><div class="frontier-head"><h3>{fr["name"]}</h3><p class="muted">{fr["tag"]}</p></div><div class="grid g3">{cards}</div></div>'
+        horizon_sec = f'<section><div class="wrap"><div class="sec-head"><div class="kick">Future directions</div><h2>What the lab is inventing next</h2></div>{fr_html}</div></section>' if d.get("frontiers") else ""
         tags = "".join(f'<span class="tag">{t}</span>' for t in d.get("tags", []))
         tag_sec = f'<section><div class="wrap"><div class="sec-head"><div class="kick">Standards &amp; compliance</div><h2>What it aligns to</h2></div><div class="tags-row">{tags}</div></div></section>' if d.get("tags") else ""
         status_sec = f'<section><div class="wrap"><div class="sec-head"><div class="kick">Status, stated honestly</div></div><div class="statusbox">{d["status"]}</div></div></section>' if d.get("status") else ""
@@ -712,6 +770,7 @@ def build():
 <section><div class="wrap"><div class="sec-head"><div class="kick">Capabilities</div><h2>What {d['domain']} delivers</h2></div><div class="grid g3">{caps}</div></div></section>
 {aud_sec}
 {diff_sec}
+{horizon_sec}
 {flagship}
 {tag_sec}
 {status_sec}
