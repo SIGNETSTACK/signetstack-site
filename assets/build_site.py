@@ -515,6 +515,14 @@ def page(fname, title, desc, body, active="", accentvars=None):
         vb = "0 0 120 134" if "134" in v else "0 0 120 120"
         out = re.sub(r'<svg([^>]*)>\{' + re.escape(k) + r'\}</svg>',
                      lambda mm: f'<svg{mm.group(1)} viewBox="{vb}">{inner}</svg>', out)
+    # canonical URL (extensionless) for this page
+    slug = fname[:-5]
+    canon = "https://signetstack.io/" + ("" if slug == "index" else slug)
+    out = out.replace("</head>", f'<link rel="canonical" href="{canon}">\n<meta property="og:url" content="{canon}"></head>', 1)
+    # clean URLs: drop .html from internal page links (files stay flat; Pages serves /company -> company.html).
+    # Skips external links (have ://), assets (.css/.svg/.png/.js), mailto, and anchors with a path slash.
+    out = re.sub(r'href="index\.html(#[^"]*)?"', lambda m: f'href="/{m.group(1) or ""}"', out)
+    out = re.sub(r'href="([a-z0-9][a-z0-9-]*)\.html(#[^"]*)?"', r'href="\1\2"', out)
     with open(os.path.join(SITE, fname), "w") as f:
         f.write(out)
 
