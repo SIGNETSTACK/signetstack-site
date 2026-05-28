@@ -519,9 +519,9 @@ def head(title, desc):
 
 def navbar(active=""):
     def cls(n): return ' class="active"' if n == active else ''
-    pit = "".join(f'<a href="{mslug(k)}.html"><span class="mi" style="color:{PA}">{icon_svg(MODULES[k]["icon"])}</span><span>{MODULES[k]["name"]}<br><span class="dom">{MODULES[k]["kicker"]}</span></span></a>' for k in MODULE_ORDER)
-    bit = "".join(f'<a href="{slug}.html"><svg>{{{slug}}}</svg><span>{DIV[slug]["name"]}<br><span class="dom">{DIV[slug]["kicker"]}</span></span></a>' for slug in ORDER)
-    bit += f'<a href="signetify.html"><img class="mi-img" src="assets/marks/signetify-icon.svg" alt=""><span>Signetify<br><span class="dom">Sister company · signetify.com</span></span></a>'
+    pit = "".join(f'<a href="{mslug(k)}.html"><span class="mi" style="color:{PA}">{icon_svg(MODULES[k]["icon"])}</span><span>{MODULES[k]["name"]}™<br><span class="dom">{MODULES[k]["kicker"]}</span></span></a>' for k in MODULE_ORDER)
+    bit = "".join(f'<a href="{slug}.html"><svg>{{{slug}}}</svg><span>{DIV[slug]["name"]}™<br><span class="dom">{DIV[slug]["kicker"]}</span></span></a>' for slug in ORDER)
+    bit += f'<a href="signetify.html"><img class="mi-img" src="assets/marks/signetify-icon.svg" alt=""><span>Signetify™<br><span class="dom">Sister company · signetify.com</span></span></a>'
     return f"""<header class="nav"><div class="wrap">
 <a class="brandlogo" href="index.html"><svg>{{master-white}}</svg>SignetStack&nbsp;Labs</a>
 <button class="navtoggle" onclick="document.getElementById('nl').classList.toggle('open')">≡</button>
@@ -535,8 +535,8 @@ def navbar(active=""):
 </nav></div></header>"""
 
 def footer():
-    plinks = "".join(f'<li><a href="{mslug(k)}.html">{MODULES[k]["name"]}</a></li>' for k in MODULE_ORDER[:6])
-    blinks = "".join(f'<li><a href="{s}.html">{DIV[s]["name"]}</a></li>' for s in ORDER)
+    plinks = "".join(f'<li><a href="{mslug(k)}.html">{MODULES[k]["name"]}™</a></li>' for k in MODULE_ORDER[:6])
+    blinks = "".join(f'<li><a href="{s}.html">{DIV[s]["name"]}™</a></li>' for s in ORDER)
     return f"""<footer><div class="wrap">
 <div class="fgrid">
 <div><div class="flogo"><svg>{{master-white}}</svg>SignetStack Labs™</div>
@@ -544,7 +544,7 @@ def footer():
 <p class="muted" style="font-size:.8rem;margin-top:12px">Registered office: {COMPANY['office']}</p>
 <div class="social">{social_row()}</div></div>
 <div><h5>Platform</h5><ul>{plinks}<li><a href="platform.html">All modules →</a></li></ul></div>
-<div><h5>Brands</h5><ul>{blinks}<li><a href="{SIGNETIFY_URL}" target="_blank" rel="noopener">Signetify ↗</a></li><li><a href="brands.html">All brands →</a></li></ul></div>
+<div><h5>Brands</h5><ul>{blinks}<li><a href="{SIGNETIFY_URL}" target="_blank" rel="noopener">Signetify™ ↗</a></li><li><a href="brands.html">All brands →</a></li></ul></div>
 <div><h5>Company</h5><ul><li><a href="company.html">About</a></li><li><a href="careers.html">Careers</a></li><li><a href="insights.html">Insights</a></li><li><a href="contact.html">Contact</a></li><li><a href="privacy.html">Privacy</a></li><li><a href="terms.html">Terms</a></li></ul></div>
 </div>
 <div class="legal"><span>© {COMPANY['year']} {COMPANY['legal']} · {COMPANY['reg_line']}. SignetStack Labs is a brand of {COMPANY['legal']}; Signetify is a sister company.</span><span>{COMPANY['loc']}</span></div>
