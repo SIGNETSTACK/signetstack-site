@@ -164,7 +164,7 @@ MODULES = {
             ("FIPS-track classical suite","AES-256-GCM, SHA-2 / SHA-3, HKDF and DRBG, with hardware acceleration."),
             ("Audit-chain & erasure","Tamper-evident hash-chaining and verifiable crypto-erasure, reused across every module."),
             ("Crypto-agile","Algorithms sit behind a selectable interface, so new standards drop in without re-architecting."),
-            ("Encrypted Parquet — Signet Forge","A companion library brings modular + post-quantum encryption to Apache Parquet.")],
+            ("Encrypted Parquet — Signet Forge","A companion library brings modular + post-quantum encryption to Apache Parquet — with a WebAssembly demo you can try in your browser. <a href=\"signet-forge.html\">See Signet Forge →</a>")],
    "tags": ["ML-KEM · FIPS 203","ML-DSA · FIPS 204","SLH-DSA · FIPS 205","Hybrid X25519 + ML-KEM","AES-256-GCM"],
    "status": "A library and engine, in active use across the platform — not a standalone app. FIPS 140-3 module validation (CMVP) is in preparation, not yet certified."},
  "vault": {"name": "Signet Vault", "icon": "vault", "kicker": "Post-Quantum Key Management",
@@ -674,7 +674,14 @@ def build():
 
     # PLATFORM HUB
     layers = "".join(f'<div class="layer"><div class="ln">{nm}</div><p>{ds}</p></div>' for nm, ds in PLATFORM['layers'])
-    comps = "".join(f'<div class="compline"><span class="iconbox">{icon_svg(ic)}</span><div><b>{nm}</b> — <span>{ds}</span></div></div>' for nm, ic, ds in COMPONENTS)
+    # Signet Forge has a dedicated demo page; other components are descriptive lines for now.
+    comp_links = {"Signet Forge": "signet-forge.html"}
+    def _compline(nm, ic, ds):
+        body = f'<span class="iconbox">{icon_svg(ic)}</span><div><b>{nm}</b> — <span>{ds}</span>'
+        if nm in comp_links:
+            body += f' <a href="{comp_links[nm]}" style="color:{PA};white-space:nowrap">Try the demo →</a>'
+        return f'<div class="compline">{body}</div></div>'
+    comps = "".join(_compline(nm, ic, ds) for nm, ic, ds in COMPONENTS)
     certs = "".join(f'<span class="tag">{c}</span>' for c in PLATFORM['certs'])
     plat = f"""
 <section class="hero"><div class="wrap">
@@ -715,6 +722,70 @@ def build():
 <section class="band"><div class="wrap" style="text-align:center"><h2>{m['tagline']}</h2><div class="cta" style="justify-content:center;margin-top:22px"><a class="btn btn-primary" href="contact.html">Talk to us</a></div></div></section>
 """
         page(f"{mslug(k)}.html", f"{m['name']} — {m['kicker']}", m["overview"][:150], mbody, "platform", (PA, PAB, PAD))
+
+    # SIGNET FORGE — live in-browser WASM demo, source: github.com/SIGNETSTACK/SIGNET_FORGE
+    forge_demo_url = "https://signetstack.github.io/SIGNET_FORGE/demo/"
+    forge_repo_url = "https://github.com/SIGNETSTACK/SIGNET_FORGE"
+    forge_docs_url = "https://signetstack.github.io/SIGNET_FORGE/"
+    forge_caps = [
+        ("Encrypted Apache Parquet", "Modular column-level encryption (PME) layered on Apache Parquet — encrypt some columns, leave others in the clear, decrypt with the keys you control."),
+        ("Post-quantum by design", "AES-256-GCM today, with a clean migration path to NIST-standardized post-quantum primitives (ML-KEM, ML-DSA) — so records you write today survive the quantum era."),
+        ("Reads in the browser", "A WebAssembly build runs the decrypt+decode path entirely client-side: the file never leaves the user's machine — no upload, no server, no telemetry."),
+        ("Zero runtime dependencies", "C++20 core, no Apache Arrow or third-party Parquet runtime — every byte that touches your data is in this one repo, auditable end-to-end."),
+        ("MiFID II &amp; EU AI Act aligned", "Footer KeyValue metadata carries signing traces, lineage tokens and policy IDs end-to-end — the file is the record of record."),
+        ("Open + commercial dual-licensed", "Source-available under the Forge Source-Available License for inspection; commercial terms for production use — see the repo."),
+    ]
+    forge_tests = [
+        ("Open the bundled sample", "One click loads <code>sample.parquet</code> from the demo bundle so you can verify the round-trip path without leaving the page.", "Open the demo →", forge_demo_url),
+        ("Bring your own .parquet", "Drag a Parquet file from your machine onto the drop zone — schema, row groups and a paged preview render in under a second; nothing leaves your browser.", "Try it →", forge_demo_url),
+        ("Decrypt an AES-256 PME file", "Tick <em>Encrypted file (AES-256 PME)</em>, paste a footer key (64 hex chars) and an optional column key, then drop the file — the demo decrypts client-side and reveals the data only if your keys are correct.", "Open the encrypted-file flow →", forge_demo_url),
+    ]
+    forge_caps_html = "".join(f'<div class="cap"><div class="dot">{i+1:02d}</div><h4>{t}</h4><p>{p}</p></div>' for i, (t, p) in enumerate(forge_caps))
+    forge_tests_html = "".join(f'<div class="cap"><div class="dot">{i+1:02d}</div><h4>{t}</h4><p>{p}</p><a class="btn btn-ghost" href="{u}" target="_blank" rel="noopener" style="margin-top:12px">{lbl}</a></div>' for i, (t, p, lbl, u) in enumerate(forge_tests))
+    forge_tags = ["Apache Parquet", "AES-256-GCM (PME)", "ML-KEM · ML-DSA (roadmap)", "C++20 · zero deps", "WebAssembly", "MiFID II RTS 22", "EU AI Act"]
+    forge_tags_html = "".join(f'<span class="tag">{t}</span>' for t in forge_tags)
+    forge_body = f"""
+<section class="hero"><div class="wrap">
+<div class="iconbox lg" style="color:{PA};margin-bottom:16px">{icon_svg("forge")}</div>
+<div class="kick eyebrow">Shared component · Signet Data Trust Network Platform</div>
+<h1>Signet Forge™</h1>
+<p class="thesis" style="margin:.45em 0 .55em">Encrypted Apache Parquet. <em>Read it in the browser. Never uploaded.</em></p>
+<p class="lead" style="max-width:64ch">Signet Forge is the post-quantum-ready, encrypted-Parquet companion library to Signet Core — a C++20 engine with a WebAssembly build that decodes and decrypts Parquet entirely client-side. It powers per-column encryption across Signet Lake, signing-trace embedding for Signet AI Governance, and tamper-evident columnar audit trails for the platform.</p>
+<div class="cta">
+<a class="btn btn-primary" href="{forge_demo_url}" target="_blank" rel="noopener">Open the live demo ↗</a>
+<a class="btn btn-ghost" href="{forge_repo_url}" target="_blank" rel="noopener">View on GitHub ↗</a>
+<a class="btn btn-ghost" href="{forge_docs_url}" target="_blank" rel="noopener">API reference ↗</a>
+</div></div></section>
+
+<section class="band"><div class="wrap">
+<div class="sec-head"><div class="kick">Try it now</div><h2>In your browser. No upload. No login.</h2>
+<p class="lead">The demo below is the production WebAssembly build, served from the Signet Forge repository's GitHub Pages site. Your files never leave your machine — the decrypt and decode happen entirely client-side.</p></div>
+<div class="card" style="padding:0;overflow:hidden;border-radius:14px">
+<iframe src="{forge_demo_url}" title="Signet Forge — Browser Parquet Preview" loading="lazy"
+        style="display:block;width:100%;height:760px;border:0;background:#1a1a2e"
+        sandbox="allow-scripts allow-same-origin allow-downloads"
+        referrerpolicy="no-referrer"></iframe>
+</div>
+<p class="muted" style="margin-top:12px;font-size:.85rem">Demo hosted at <code>{forge_demo_url}</code>. If the iframe is blocked in your environment, <a href="{forge_demo_url}" target="_blank" rel="noopener">open it in a new tab</a>.</p>
+</div></section>
+
+<section><div class="wrap"><div class="sec-head"><div class="kick">Three things to try</div><h2>Immediate test scenarios</h2><p class="lead">Concrete proofs you can run today — each one ends in your browser, with no server roundtrip.</p></div>
+<div class="grid g3">{forge_tests_html}</div></div></section>
+
+<section class="band"><div class="wrap"><div class="sec-head"><div class="kick">What it does</div><h2>Capabilities</h2></div><div class="grid g3">{forge_caps_html}</div></div></section>
+
+<section><div class="wrap"><div class="sec-head"><div class="kick">Standards &amp; alignment</div><h2>What it speaks</h2></div><div class="tags-row">{forge_tags_html}</div></div></section>
+
+<section class="band"><div class="wrap"><div class="sec-head"><div class="kick">Status, stated honestly</div></div>
+<div class="statusbox">Signet Forge is source-available on GitHub and ships with a Doxygen API reference and a WebAssembly demo, both built and deployed via the repository's CI. The classical encryption suite (AES-256-GCM modular Parquet encryption) is implemented and exercised today; the post-quantum migration path (ML-KEM key wrapping, ML-DSA-signed footers) is on the near-term roadmap. Commercial licensing terms are listed alongside the open source-available licence.</div>
+<div class="relbox">A shared component of the <a href="platform.html" style="color:{PA}">Signet Data Trust Network Platform</a> — built on the same cryptographic foundation as Signet Core, used end-to-end by Signet Lake, AI Governance and Stream.</div></div></section>
+
+<section class="band"><div class="wrap" style="text-align:center"><h2>Encrypted Parquet, in the browser, on a post-quantum path.</h2><div class="cta" style="justify-content:center;margin-top:22px"><a class="btn btn-primary" href="{forge_demo_url}" target="_blank" rel="noopener">Open the demo ↗</a><a class="btn btn-ghost" href="contact.html">Talk to us</a></div></div></section>
+"""
+    page("signet-forge.html",
+         "Signet Forge — Encrypted Apache Parquet, browser-native demo",
+         "Signet Forge is the post-quantum-ready encrypted-Parquet library powering the Signet Data Trust Network Platform. Try the WebAssembly demo in your browser — your files never leave your machine.",
+         forge_body, "platform", (PA, PAB, PAD))
 
     # BRANDS HUB
     platcard = f'<a class="brandcard card" href="platform.html" style="--bd:{PAD};--bb:{PAB};--ba:{PA}"><span class="top"></span><span class="iconbox" style="width:54px;height:54px;color:{PA};margin-bottom:16px">{icon_svg("platform")}</span><h3>{PLATFORM["name"]}™</h3><div class="dom" style="color:{PAD}">Data Trust · Post-Quantum</div><p>{PLATFORM["tagline"]}</p><div class="more" style="color:{PAB}">Explore the platform →</div></a>'
