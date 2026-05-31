@@ -746,9 +746,9 @@ def build():
         ("Open + commercial dual-licensed", "Source-available under the Forge Source-Available License for inspection; commercial terms for production use — see the repo."),
     ]
     forge_tests = [
-        ("Open the bundled sample", "One click loads <code>sample.parquet</code> from the demo bundle so you can verify the round-trip path without leaving the page.", "Open the demo →", forge_demo_url),
-        ("Bring your own .parquet", "Drag a Parquet file from your machine onto the drop zone — schema, row groups and a paged preview render in under a second; nothing leaves your browser.", "Try it →", forge_demo_url),
-        ("Decrypt an AES-256 PME file", "Tick <em>Encrypted file (AES-256 PME)</em>, paste a footer key (64 hex chars) and an optional column key, then drop the file — the demo decrypts client-side and reveals the data only if your keys are correct. From there: <strong>Download .parquet</strong> saves the original bytes (encrypted files stay encrypted — safe to forward), and <strong>Download CSV</strong> / <strong>Download JSON</strong> export the decrypted rows. All three are client-side, no network round-trip.", "Open the encrypted-file flow →", forge_demo_url),
+        ("Encrypt your own CSV — in your browser", "Drag a <code>.csv</code> onto the demo. A panel opens, generates a fresh AES-256 key for you (via <code>crypto.getRandomValues</code>), takes an AAD prefix, and the <strong>Encrypt &amp; download .parquet</strong> button writes an encrypted Parquet straight back to your machine. A one-click <em>Decrypt it here to verify</em> button then re-feeds it through the decryption path with the same key + AAD pre-filled — closing the round trip without leaving the page.", "Open the in-browser flow →", forge_demo_url),
+        ("Decrypt an AES-256 PME file", "Already have an encrypted Parquet? Tick <em>Encrypted file (AES-256 PME)</em>, paste a footer key (64 hex chars) and optional column key, then drop the file. From there: <strong>Download .parquet</strong> saves the original bytes (encrypted files stay encrypted — safe to forward), and <strong>Download CSV</strong> / <strong>Download JSON</strong> export the decrypted rows. All client-side, no network round-trip.", "Open the encrypted-file flow →", forge_demo_url),
+        ("Open the bundled sample, or bring any .parquet", "One drop loads the bundled <code>sample.parquet</code> from the demo, or any Parquet from your machine — schema, row groups and a paged preview render in under a second; nothing leaves your browser.", "Open the demo →", forge_demo_url),
     ]
     # Precautions surfaced before encryption — strong-encryption tools delete data
     # safely on purpose. Users need to know what they own (the key) and what the
@@ -829,10 +829,10 @@ def build():
 <div class="grid g3">{forge_safety_html}</div></div></section>
 
 <section><div class="wrap">
-<div class="sec-head"><div class="kick">Convert your own CSV</div><h2>The four-step recipe</h2>
-<p class="lead">Take a CSV from your machine, turn it into an encrypted Parquet file, and decrypt it in the demo above — all on the command line. Requires a one-time local build of the CLI.</p></div>
+<div class="sec-head"><div class="kick">For scripted or batch use — the CLI</div><h2>Same flow, on the command line</h2>
+<p class="lead">The browser demo above handles single-file, interactive use. For scripted pipelines, batch jobs, or anything you want under version control, the <code>signet_cli</code> binary gives you the same encrypted round trip on the command line.</p></div>
 <div class="grid g2">{forge_cli_html}</div>
-<div class="statusbox" style="margin-top:20px"><strong>Why the local build:</strong> the encryption flags depend on the commercial-tier writer surface in the library, which is off by default. Reconfiguring with <code>-DSIGNET_ENABLE_COMMERCIAL=ON</code> turns it on for your local build only — it does not change the licence of the repository or your obligations under it. See <a href="{forge_repo_url}/blob/main/LICENSE_COMMERCIAL" target="_blank" rel="noopener">LICENSE_COMMERCIAL</a> on the Forge repository for commercial-use terms.</div>
+<div class="statusbox" style="margin-top:20px"><strong>Why the local build:</strong> the encryption flags depend on the commercial-tier writer surface in the library, which is off by default for CLI builds. Reconfiguring with <code>-DSIGNET_ENABLE_COMMERCIAL=ON</code> turns it on for your local build only — it does not change the licence of the repository or your obligations under it. See <a href="{forge_repo_url}/blob/main/LICENSE_COMMERCIAL" target="_blank" rel="noopener">LICENSE_COMMERCIAL</a> on the Forge repository for commercial-use terms. <em>(The hosted WebAssembly demo is already built with the commercial flag — you don't need it for the in-browser flow above.)</em></div>
 </div></section>
 
 <section class="band"><div class="wrap"><div class="sec-head"><div class="kick">What it does</div><h2>Capabilities</h2></div><div class="grid g3">{forge_caps_html}</div></div></section>
