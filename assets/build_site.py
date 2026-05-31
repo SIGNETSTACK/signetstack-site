@@ -520,6 +520,8 @@ def head(title, desc):
 def navbar(active=""):
     def cls(n): return ' class="active"' if n == active else ''
     pit = "".join(f'<a href="{mslug(k)}.html"><span class="mi" style="color:{PA}">{icon_svg(MODULES[k]["icon"])}</span><span>{MODULES[k]["name"]}™<br><span class="dom">{MODULES[k]["kicker"]}</span></span></a>' for k in MODULE_ORDER)
+    # Shared components with their own surfaces (live demos / standalone pages) get a slot too.
+    pit += f'<a href="signet-forge.html"><span class="mi" style="color:{PA}">{icon_svg("forge")}</span><span>Signet Forge™<br><span class="dom">Encrypted Parquet · Live WASM demo</span></span></a>'
     bit = "".join(f'<a href="{slug}.html"><svg>{{{slug}}}</svg><span>{DIV[slug]["name"]}™<br><span class="dom">{DIV[slug]["kicker"]}</span></span></a>' for slug in ORDER)
     bit += f'<a href="signetify.html"><img class="mi-img" src="assets/marks/signetify-icon.svg" alt=""><span>Signetify™<br><span class="dom">Sister company · signetify.com</span></span></a>'
     return f"""<header class="nav"><div class="wrap">
@@ -536,6 +538,7 @@ def navbar(active=""):
 
 def footer():
     plinks = "".join(f'<li><a href="{mslug(k)}.html">{MODULES[k]["name"]}™</a></li>' for k in MODULE_ORDER[:6])
+    plinks += '<li><a href="signet-forge.html">Signet Forge™ <span style="color:var(--accent)">· demo</span></a></li>'
     blinks = "".join(f'<li><a href="{s}.html">{DIV[s]["name"]}™</a></li>' for s in ORDER)
     return f"""<footer><div class="wrap">
 <div class="fgrid">
@@ -694,7 +697,14 @@ def build():
 <section class="band"><div class="wrap"><div class="sec-head"><div class="kick">The modules</div><h2>One platform, composable modules</h2></div>
 <div class="grid g3">{modgrid}</div></div></section>
 <section><div class="wrap"><div class="sec-head"><div class="kick">How it fits together</div><h2>From cryptographic core to verifiable proof</h2></div>{layers}</div></section>
-<section class="band"><div class="wrap"><div class="sec-head"><div class="kick">Powered by</div><h2>Shared components</h2></div>{comps}</div></section>
+<section class="band"><div class="wrap"><div class="sec-head"><div class="kick">Powered by</div><h2>Shared components</h2></div>{comps}
+<a class="card" href="signet-forge.html" style="display:flex;align-items:center;gap:18px;margin-top:24px;text-decoration:none;color:inherit;border-left:4px solid {PA}">
+<span class="iconbox" style="color:{PA};flex-shrink:0">{icon_svg("forge")}</span>
+<div style="flex:1"><div class="kick" style="color:{PA};margin-bottom:4px">Live in your browser · no upload</div>
+<h3 style="font-size:1.15rem;margin:0">Signet Forge™ — try the WebAssembly demo</h3>
+<p class="muted" style="margin:.4em 0 0;font-size:.95rem">Drop a Parquet file, decode it client-side, optionally decrypt it with an AES-256 footer key — all without leaving your browser.</p></div>
+<span style="color:{PA};font-weight:600;white-space:nowrap">Open demo →</span></a>
+</div></section>
 <section><div class="wrap"><div class="sec-head"><div class="kick">Certification &amp; trust</div><h2>Engineered to the standards — stated honestly</h2></div>
 <div class="tags-row">{certs}</div>
 <div class="statusbox" style="margin-top:20px">Engineered to FIPS 140-3 requirements, with NIST-standardized post-quantum algorithms throughout. We claim no certification we do not hold: FIPS 140-3 CMVP validation is in preparation, and SOC 2, ISO 27001, NCSC CPA and Common Criteria are in planning or on the roadmap. Every module is pre-GA; AI Governance is the most mature.</div></div></section>
