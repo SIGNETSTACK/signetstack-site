@@ -748,7 +748,7 @@ def build():
     forge_tests = [
         ("Open the bundled sample", "One click loads <code>sample.parquet</code> from the demo bundle so you can verify the round-trip path without leaving the page.", "Open the demo →", forge_demo_url),
         ("Bring your own .parquet", "Drag a Parquet file from your machine onto the drop zone — schema, row groups and a paged preview render in under a second; nothing leaves your browser.", "Try it →", forge_demo_url),
-        ("Decrypt an AES-256 PME file", "Tick <em>Encrypted file (AES-256 PME)</em>, paste a footer key (64 hex chars) and an optional column key, then drop the file — the demo decrypts client-side and reveals the data only if your keys are correct.", "Open the encrypted-file flow →", forge_demo_url),
+        ("Decrypt an AES-256 PME file", "Tick <em>Encrypted file (AES-256 PME)</em>, paste a footer key (64 hex chars) and an optional column key, then drop the file — the demo decrypts client-side and reveals the data only if your keys are correct. From there: <strong>Download .parquet</strong> saves the original bytes (encrypted files stay encrypted — safe to forward), and <strong>Download CSV</strong> / <strong>Download JSON</strong> export the decrypted rows. All three are client-side, no network round-trip.", "Open the encrypted-file flow →", forge_demo_url),
     ]
     # Precautions surfaced before encryption — strong-encryption tools delete data
     # safely on purpose. Users need to know what they own (the key) and what the
@@ -766,6 +766,8 @@ def build():
          "Treat an AES-256 key the way you'd treat a password: send it through a password-manager share, a Signal / age / GPG-encrypted channel, or a vault — never inline in a message that gets logged, indexed or back-up-synced in plaintext."),
         ("Public demo is for evaluation; production wants the local build",
          "The hosted demo loads its JS and WebAssembly from this site for convenience. For regulated PII / financial / health data, build the CLI or library locally with <code>-DSIGNET_ENABLE_COMMERCIAL=ON</code> so the entire compile, key-handling and storage surface stays inside your trust boundary."),
+        ("Downloading an encrypted .parquet is just sharing the ciphertext",
+         "The <strong>Download .parquet</strong> button is a passthrough — it writes the exact bytes you uploaded. An encrypted file <em>stays</em> encrypted on disk and is safe to email, attach or upload to shared storage. But sharing the file does <em>not</em> share the key — the recipient still needs the footer key, optional column key, and the same AAD prefix to decrypt. Send those separately, through a different channel."),
         ("Report vulnerabilities responsibly",
          f'Found a real cryptographic or implementation issue? Use the coordinated-disclosure path in <a href="{forge_repo_url}/blob/main/SECURITY.md" target="_blank" rel="noopener">SECURITY.md</a> on the Forge repository — please don\'t open a public issue.'),
     ]
