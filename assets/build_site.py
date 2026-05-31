@@ -750,8 +750,41 @@ def build():
         ("Bring your own .parquet", "Drag a Parquet file from your machine onto the drop zone — schema, row groups and a paged preview render in under a second; nothing leaves your browser.", "Try it →", forge_demo_url),
         ("Decrypt an AES-256 PME file", "Tick <em>Encrypted file (AES-256 PME)</em>, paste a footer key (64 hex chars) and an optional column key, then drop the file — the demo decrypts client-side and reveals the data only if your keys are correct.", "Open the encrypted-file flow →", forge_demo_url),
     ]
+    # Precautions surfaced before encryption — strong-encryption tools delete data
+    # safely on purpose. Users need to know what they own (the key) and what the
+    # system will not recover for them (anything once the key is gone).
+    forge_precautions = [
+        ("Generate keys with a CSPRNG, not by hand",
+         "Use <code>openssl rand -hex 32</code> (or your platform's equivalent) for every file. Hand-typed or guessable keys collapse AES-256 to whatever your imagination is — usually a few bits of real entropy."),
+        ("Save the key before you close the terminal",
+         "When you run <code>KEY=$(openssl rand -hex 32)</code>, that 64-character hex string only exists in your shell's environment. Close the tab without copying it into a password manager (1Password, Bitwarden, <code>pass</code>) and the file becomes permanently unreadable. <strong>That is by design — it is the crypto-shred guarantee, not a bug.</strong>"),
+        ("The AAD prefix must match — character for character",
+         "If you encrypted with <code>--aad-prefix \"mydata-2026-05-31\"</code>, you must type that <em>exact</em> string into the demo's AAD field. A capital letter, a missing dash, an extra space — any difference makes the GCM tag fail to verify, and there is no recovery path."),
+        ("Use a trusted device",
+         "The demo keeps your file in the browser — no upload, no server, no telemetry — but the device itself still sees the plaintext after decryption. Don't use shared kiosks, active screen-sharing sessions, or machines with cross-device clipboard sync turned on while you paste keys."),
+        ("Never share keys over email, chat or SMS",
+         "Treat an AES-256 key the way you'd treat a password: send it through a password-manager share, a Signal / age / GPG-encrypted channel, or a vault — never inline in a message that gets logged, indexed or back-up-synced in plaintext."),
+        ("Public demo is for evaluation; production wants the local build",
+         "The hosted demo loads its JS and WebAssembly from this site for convenience. For regulated PII / financial / health data, build the CLI or library locally with <code>-DSIGNET_ENABLE_COMMERCIAL=ON</code> so the entire compile, key-handling and storage surface stays inside your trust boundary."),
+        ("Report vulnerabilities responsibly",
+         f'Found a real cryptographic or implementation issue? Use the coordinated-disclosure path in <a href="{forge_repo_url}/blob/main/SECURITY.md" target="_blank" rel="noopener">SECURITY.md</a> on the Forge repository — please don\'t open a public issue.'),
+    ]
+    # CLI workflow surfaced as a concrete recipe — every line tested locally,
+    # round-trip verified into the demo.
+    forge_cli_steps = [
+        ("Build the CLI (one time)",
+         "<pre><code>cd /path/to/SIGNET_FORGE\ncmake --preset release -DSIGNET_ENABLE_COMMERCIAL=ON\ncmake --build --preset release --target signet_cli\n# binary at build/signet_cli</code></pre>"),
+        ("Generate a fresh AES-256 key",
+         "<pre><code>KEY=$(openssl rand -hex 32)\necho $KEY     # SAVE THIS to a password manager NOW</code></pre>"),
+        ("Convert + encrypt your CSV in one shot",
+         "<pre><code>./build/signet_cli convert mydata.csv mydata.parquet \\\n    --encrypt \\\n    --footer-key  $KEY \\\n    --column-key  $KEY \\\n    --aad-prefix  \"mydata-YYYY-MM-DD\"</code></pre>"),
+        ("Open the file in the demo above",
+         "Tick <em>Encrypted file (AES-256 PME)</em>, paste <code>$KEY</code> into both the footer and column key fields, type the exact same AAD prefix, then drop the <code>.parquet</code> file. Decryption happens entirely in your browser."),
+    ]
     forge_caps_html = "".join(f'<div class="cap"><div class="dot">{i+1:02d}</div><h4>{t}</h4><p>{p}</p></div>' for i, (t, p) in enumerate(forge_caps))
     forge_tests_html = "".join(f'<div class="cap"><div class="dot">{i+1:02d}</div><h4>{t}</h4><p>{p}</p><a class="btn btn-ghost" href="{u}" target="_blank" rel="noopener" style="margin-top:12px">{lbl}</a></div>' for i, (t, p, lbl, u) in enumerate(forge_tests))
+    forge_safety_html = "".join(f'<div class="cap"><div class="dot" style="background:#F59E0B;color:#fff">!</div><h4>{t}</h4><p>{p}</p></div>' for t, p in forge_precautions)
+    forge_cli_html = "".join(f'<div class="cap"><div class="dot">{i+1:02d}</div><h4>{t}</h4>{p}</div>' for i, (t, p) in enumerate(forge_cli_steps))
     forge_tags = ["Apache Parquet", "AES-256-GCM (PME)", "ML-KEM · ML-DSA (roadmap)", "C++20 · zero deps", "WebAssembly", "MiFID II RTS 22", "EU AI Act"]
     forge_tags_html = "".join(f'<span class="tag">{t}</span>' for t in forge_tags)
     forge_body = f"""
@@ -770,6 +803,12 @@ def build():
 <section class="band"><div class="wrap">
 <div class="sec-head"><div class="kick">Try it now</div><h2>In your browser. No upload. No login.</h2>
 <p class="lead">The demo below is the production WebAssembly build, served from the Signet Forge repository's GitHub Pages site. Your files never leave your machine — the decrypt and decode happen entirely client-side.</p></div>
+
+<div class="card" style="border-left:4px solid #F59E0B;background:rgba(245,158,11,0.06);padding:18px 22px;margin-bottom:18px">
+<div class="kick" style="color:#F59E0B;margin-bottom:6px">Heads up · key custody is yours</div>
+<p style="margin:0;font-size:.95rem"><strong>Your file stays in your browser — but your AES-256 key is yours alone to manage.</strong> If you lose it, the file is unrecoverable. That is the crypto-shred guarantee, not a bug. Save the key into a password manager <em>before</em> closing the terminal you generated it in, and make sure the AAD prefix you type into the demo matches the one used at encrypt time exactly. The full safety brief is below the demo.</p>
+</div>
+
 <div class="card" style="padding:0;overflow:hidden;border-radius:14px">
 <iframe src="{forge_demo_url}" title="Signet Forge — Browser Parquet Preview" loading="lazy"
         style="display:block;width:100%;height:760px;border:0;background:#1a1a2e"
@@ -781,6 +820,18 @@ def build():
 
 <section><div class="wrap"><div class="sec-head"><div class="kick">Three things to try</div><h2>Immediate test scenarios</h2><p class="lead">Concrete proofs you can run today — each one ends in your browser, with no server roundtrip.</p></div>
 <div class="grid g3">{forge_tests_html}</div></div></section>
+
+<section class="band"><div class="wrap">
+<div class="sec-head"><div class="kick" style="color:#F59E0B">Before you encrypt · read this once</div><h2>Important precautions</h2>
+<p class="lead">Signet Forge gives you real cryptographic guarantees. That cuts both ways: when the system says a file is unrecoverable, it really is. These are the seven things every user should know before encrypting their first file.</p></div>
+<div class="grid g3">{forge_safety_html}</div></div></section>
+
+<section><div class="wrap">
+<div class="sec-head"><div class="kick">Convert your own CSV</div><h2>The four-step recipe</h2>
+<p class="lead">Take a CSV from your machine, turn it into an encrypted Parquet file, and decrypt it in the demo above — all on the command line. Requires a one-time local build of the CLI.</p></div>
+<div class="grid g2">{forge_cli_html}</div>
+<div class="statusbox" style="margin-top:20px"><strong>Why the local build:</strong> the encryption flags depend on the commercial-tier writer surface in the library, which is off by default. Reconfiguring with <code>-DSIGNET_ENABLE_COMMERCIAL=ON</code> turns it on for your local build only — it does not change the licence of the repository or your obligations under it. See <a href="{forge_repo_url}/blob/main/LICENSE_COMMERCIAL" target="_blank" rel="noopener">LICENSE_COMMERCIAL</a> on the Forge repository for commercial-use terms.</div>
+</div></section>
 
 <section class="band"><div class="wrap"><div class="sec-head"><div class="kick">What it does</div><h2>Capabilities</h2></div><div class="grid g3">{forge_caps_html}</div></div></section>
 
@@ -794,7 +845,7 @@ def build():
 """
     page("signet-forge.html",
          "Signet Forge — Encrypted Apache Parquet, browser-native demo",
-         "Signet Forge is the post-quantum-ready encrypted-Parquet library powering the Signet Data Trust Network Platform. Try the WebAssembly demo in your browser — your files never leave your machine.",
+         "Signet Forge is the post-quantum-ready encrypted-Parquet library powering the Signet Data Trust Network Platform. Try the WebAssembly demo in your browser — your files never leave your machine. Read the safety brief before you encrypt.",
          forge_body, "platform", (PA, PAB, PAD))
 
     # BRANDS HUB
