@@ -257,7 +257,7 @@ COMPONENTS = [("Signet Forge","forge","Encrypted Apache Parquet — modular + po
 ICONS = {
  "core": '<polygon points="12,3 20,7.5 20,16.5 12,21 4,16.5 4,7.5"/><circle cx="12" cy="12" r="2.6" fill="currentColor" stroke="none"/>',
  "vault": '<rect x="3.5" y="5" width="17" height="14" rx="2"/><circle cx="12" cy="12" r="3"/><path d="M12 12 v2.4"/><path d="M7 19 v1.6 M17 19 v1.6"/>',
- "kms": '<circle cx="8" cy="16" r="3.9"/><path d="M10.75 13.25 L20 4"/><path d="M16 8 l2.6 2.6 M18 6 l2.6 2.6"/>',
+ "kms": '<rect x="3.5" y="3.5" width="17" height="17" rx="3.5"/><circle cx="12" cy="9.7" r="2.5"/><path d="M12 12.2 V17"/><path d="M12 14.6 h2.3 M12 16.3 h1.7"/>',
  "aigov": '<circle cx="12" cy="12" r="8"/><path d="M8.6 12.2 l2.2 2.2 l4.6-5"/>',
  "lake": '<ellipse cx="12" cy="6" rx="7" ry="2.6"/><path d="M5 6 v6 c0 1.4 3.1 2.6 7 2.6 s7-1.2 7-2.6 V6"/><path d="M5 12 c0 1.4 3.1 2.6 7 2.6 s7-1.2 7-2.6"/>',
  "stream": '<path d="M3 8 q4 -3.2 8 0 t8 0"/><path d="M3 13 q4 -3.2 8 0 t8 0"/><path d="M3 18 q4 -3.2 8 0 t8 0"/>',
