@@ -28,7 +28,7 @@ Hosting: **GitHub Pages** (Signet Stack Ltd has GitHub Enterprise). A GitHub Act
 
 HTTPS certificates provision automatically after DNS resolves (minutes–24h). Confirm `https://signetstack.io` loads with a valid padlock.
 
-## 3. Email (so info@ / johnson@signetstack.io work)
+## 3. Email (so info@ and the founder address work)
 Separate from the site: set up mail on the domain (Google Workspace / Microsoft 365 / Fastmail) and add **MX, SPF, DKIM, DMARC** records. (GitHub Pages records above are web-only.)
 
 ---

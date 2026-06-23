@@ -14,7 +14,11 @@ os.makedirs(os.path.join(A, "img"), exist_ok=True)
 
 # ---------------- DATA ----------------
 COMPANY = {"legal": "Signet Stack Ltd", "master": "SignetStack Labs", "year": "2026",
-           "email": "info@signetstack.io", "founder_email": "johnson@signetstack.io", "loc": "London · Remote-first",
+           "email": "info@signetstack.io",
+           # Founder address is stored base64-encoded and assembled client-side (see footer
+           # decoder) so the plaintext never appears in the HTML source or this repo — keeps it
+           # human-usable on the page while staying out of crawlers / search indexes.
+           "founder_email_b64": "am9obnNvbkBzaWduZXRzdGFjay5pbw==", "loc": "London · Remote-first",
            "reg": "13011013", "reg_line": "Registered in England &amp; Wales · Companies House No. 13011013",
            "office": "86–90 Paul Street, London EC2A 4NE",
            "tagline": "A house of frontier-technology brands."}
@@ -569,12 +573,19 @@ def footer():
 </div></footer>
 <script>document.querySelectorAll('.navlinks a:not(.dropdown a)').forEach(a=>a.addEventListener('click',()=>document.getElementById('nl').classList.remove('open')));</script>"""
 
+# Client-side email assembler: decodes base64 `data-e` on <a class="eml"> into a mailto link
+# (and visible text unless data-show="0"). Plain (non-f) string so JS braces are literal.
+EMAIL_DECODER_JS = ("<script>document.querySelectorAll('a.eml[data-e]').forEach(function(a){"
+    "try{var e=atob(a.getAttribute('data-e')),s=a.getAttribute('data-s');"
+    "a.href='mailto:'+e+(s?'?subject='+encodeURIComponent(s):'');"
+    "if(a.getAttribute('data-show')!=='0')a.textContent=e;}catch(x){}});</script>")
+
 def page(fname, title, desc, body, active="", accentvars=None):
     style = ""
     if accentvars:
         a, b, dp = accentvars
         style = f'<style>body{{--accent:{a};--accent-bright:{b};--accent-deep:{dp}}}</style>'
-    out = head(title, desc) + style + "<body>" + navbar(active) + body + footer() + "</body></html>"
+    out = head(title, desc) + style + "<body>" + navbar(active) + body + footer() + EMAIL_DECODER_JS + "</body></html>"
     # inline marks: replace <svg ...>{key}</svg> -> <svg ...viewBox=..>INNER</svg> (preserve any attrs)
     for m in os.listdir(os.path.join(A, "marks")):
         k = m[:-4]; v = open(os.path.join(A, "marks", m)).read()
@@ -1033,7 +1044,7 @@ def build():
         page(f"insight-{p['slug']}.html", f"{p['title']} — SignetStack Labs", p['excerpt'], art, "insights")
 
     # CAREERS
-    roles = "".join(f'<a class="post" href="mailto:{COMPANY["founder_email"]}?subject=Application%3A%20{title.replace(" ","%20")}"><div class="meta">{team} · {loc}</div><h3 style="font-size:1.2rem">{title}</h3></a>' for title,team,loc in ROLES)
+    roles = "".join(f'<a class="post eml" data-e="{COMPANY["founder_email_b64"]}" data-s="Application: {title}" data-show="0" href="contact.html"><div class="meta">{team} · {loc}</div><h3 style="font-size:1.2rem">{title}</h3></a>' for title,team,loc in ROLES)
     car = f"""<section class="hero"><div class="wrap"><div class="kick eyebrow">Careers</div><h1>Build the hard part once. With us.</h1>
 <p class="lead" style="max-width:60ch">We're a small, senior, remote-first team building production systems where correctness and speed both matter. If you want your work to compound across a family of brands, we should talk.</p></div></section>
 <section class="band"><div class="wrap"><div class="grid g3">
@@ -1042,7 +1053,7 @@ def build():
 <div class="cap"><div class="dot">◆</div><h4>Craft & honesty</h4><p>We ship things we can defend, and we say what isn't done yet.</p></div>
 </div></div></section>
 <section><div class="wrap" style="max-width:820px"><div class="sec-head"><div class="kick">Open roles</div><h2>Where we're hiring</h2></div>{roles}
-<p class="muted" style="margin-top:24px">Don't see your role? Introduce yourself at <a href="mailto:{COMPANY['founder_email']}" style="color:var(--ink)">{COMPANY['founder_email']}</a>.</p></div></section>"""
+<p class="muted" style="margin-top:24px">Don't see your role? Introduce yourself to <a class="eml" data-e="{COMPANY['founder_email_b64']}" href="contact.html" style="color:var(--ink)">the founder</a>.</p></div></section>"""
     page("careers.html", "Careers — SignetStack Labs", "Join SignetStack Labs — remote-first, senior, frontier engineering.", car, "careers")
 
     # CONTACT
@@ -1059,7 +1070,7 @@ def build():
 </form>
 <div class="card"><h3 style="font-size:1.15rem">Direct</h3>
 <p class="muted" style="margin:.6em 0">General: <a href="mailto:{COMPANY['email']}" style="color:var(--ink)">{COMPANY['email']}</a></p>
-<p class="muted" style="margin:.3em 0">Founder &amp; partnerships: <a href="mailto:{COMPANY['founder_email']}" style="color:var(--ink)">{COMPANY['founder_email']}</a></p>
+<p class="muted" style="margin:.3em 0">Founder &amp; partnerships: <a class="eml" data-e="{COMPANY['founder_email_b64']}" href="contact.html" style="color:var(--ink)">contact the founder</a></p>
 <p class="muted" style="margin-top:.5em">Location: {COMPANY['loc']}</p>
 <p class="muted" style="margin-top:.4em">{COMPANY['legal']} · {COMPANY['reg_line']}</p>
 <p class="muted" style="margin-top:.3em">Registered office: {COMPANY['office']}</p>

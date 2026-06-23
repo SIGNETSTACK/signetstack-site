@@ -142,7 +142,7 @@ brand memory and the per-brand kits held privately by Signet Stack Ltd.
 
 **Signet Stack Ltd** — Registered in England & Wales, Companies House No.
 **13011013**. Registered office: 86–90 Paul Street, London EC2A 4NE.
-General: info@signetstack.io · Partnerships/careers: johnson@signetstack.io.
+General: info@signetstack.io · Partnerships / careers: via the contact page at signetstack.io/contact.
 
 This repository is proprietary. See [`LICENSE`](LICENSE) and
 [`TRADEMARKS.md`](TRADEMARKS.md). Content describing products reflects honestly-

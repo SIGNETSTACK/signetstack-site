@@ -57,7 +57,8 @@ the new themed page are generated automatically.
 - **Signetify** links out to [signetify.com](https://signetify.com) (its own brand).
 - Contact form is a front-end demo (no backend) — wire to a form handler/email.
 - `privacy.html` / `terms.html` are templates — have counsel review.
-- Emails: `info@signetstack.io` (general), `johnson@signetstack.io`
+- Emails: `info@signetstack.io` (general); founder / partnerships via the contact page (the
+  founder address is base64-assembled client-side in the footer, never in plaintext source)
   (founder/partnerships/careers). Registered office (UK trading-disclosure
   requirement) is shown in the footer. Trademark clearance on the SignetStack
   names is still advisable.
