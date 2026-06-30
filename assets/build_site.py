@@ -24,10 +24,10 @@ COMPANY = {"legal": "Signet Stack Ltd", "master": "SignetStack Labs", "year": "2
            "tagline": "A house of frontier-technology brands."}
 
 DIV = {  # slug -> enriched page data, sourced from each project's docs (public-safe)
- "velocity": {"key": "signetstack-velocity", "name": "SignetStack Velocity", "domain": "Velocity",
+ "velocity": {"key": "signetstack-velocity", "name": "Velocity Quant Technologies", "domain": "Velocity",
    "kicker": "Ultra-Low-Latency · HFT", "accent": "#12C2C9", "bright": "#16E0D4", "deep": "#0B7C82",
    "tagline": "Microsecond execution, built to be trusted with real capital.",
-   "overview": "SignetStack Velocity builds production, institutional-grade trading and liquidity technology. Its flagship engine, HFT V5 Omni, watches multiple venues in microseconds, decides with a layered statistical, machine-learning and Bayesian stack, executes inside a hard safety perimeter, and learns from every outcome — running live on real money for eighteen months across five generations, with today's V5 in production for the last eight, and architected to extend across asset classes.",
+   "overview": "Velocity Quant Technologies builds production, institutional-grade trading and liquidity technology. Its flagship engine, HFT V5 Omni, watches multiple venues in microseconds, decides with a layered statistical, machine-learning and Bayesian stack, executes inside a hard safety perimeter, and learns from every outcome — running live on real money for eighteen months across five generations, with today's V5 in production for the last eight, and architected to extend across asset classes.",
    "caps": [("Microsecond speed","Quote-to-decision in single-digit microseconds end to end, using kernel-bypass networking and lock-free, CPU-pinned engineering found only in tier-1 firms."),
             ("Safe self-learning","A closed feedback loop scores its own predictions and recalibrates continuously — with guardrails that are harder to build than the learning itself."),
             ("Structural safety","An 18-trigger circuit breaker, a dead-man's switch and continuous capital reconciliation halt trouble automatically. It stops itself rather than press on."),
@@ -102,7 +102,7 @@ DIV = {  # slug -> enriched page data, sourced from each project's docs (public-
  "research": {"key": "signetstack-rnd", "name": "SignetStack R&D", "domain": "R&D",
    "kicker": "Research & Advanced Development", "accent": "#10B981", "bright": "#34D399", "deep": "#0A6E50",
    "tagline": "The innovation arm of SignetStack Labs — where the hardest cryptography, agentic AI and the future of the web are invented, and proven before they ship.",
-   "overview": "SignetStack R&D is the innovation, research and advanced-development arm of SignetStack Labs — where the hardest problems are invented around before they are productised. Its proven output today is the post-quantum, hardware-adaptive cryptographic core that every Signet product inherits — from the Signet Data Trust Network Platform to SignetStack Velocity. Its frontier reaches into agentic AI, multimodal generation and the future of the web. The method never changes: nothing graduates on a claim — every result is run through the Signet Observatory as a reproducible, tamper-evident proof before it reaches production.",
+   "overview": "SignetStack R&D is the innovation, research and advanced-development arm of SignetStack Labs — where the hardest problems are invented around before they are productised. Its proven output today is the post-quantum, hardware-adaptive cryptographic core that every Signet product inherits — from the Signet Data Trust Network Platform to the independent venture Velocity Quant Technologies. Its frontier reaches into agentic AI, multimodal generation and the future of the web. The method never changes: nothing graduates on a claim — every result is run through the Signet Observatory as a reproducible, tamper-evident proof before it reaches production.",
    "caps": [("Post-quantum & crypto-agility","Backend-agnostic post-quantum cryptography — ML-KEM, ML-DSA and SLH-DSA behind a stable interface, so adopting a new NIST-standardized library or algorithm is an additive change, never a re-architecture, and never invalidates historical records."),
             ("Standards & validation research","Novel approaches to validating hybrid classical + post-quantum cryptographic modules to FIPS 140-3 / CMVP across multiple hardware and OS targets from a single codebase. Validation is in preparation — not yet certified."),
             ("Hardware-adaptive, accelerated crypto","Secure, AI-native cryptographic compute that adapts across CPU SIMD paths (AES-NI, ARMv8) and GPU backends — choosing the fastest safe path for the workload without changing the security model."),
@@ -142,8 +142,9 @@ DIV = {  # slug -> enriched page data, sourced from each project's docs (public-
    "stats": [("3","NIST PQC standards in use — ML-KEM, ML-DSA, SLH-DSA"),("4","active research tracks"),("CPU · GPU · edge","hardware-adaptive crypto targets"),("Proof-first","reproducible, hash-chained results")],
    "flagship": False},
 }
-ORDER = ["velocity", "dxp", "research"]   # SignetStack product brands (besides the platform)
+ORDER = ["dxp", "research", "velocity"]   # SignetStack product brands (besides the platform)
 SIGNETIFY_URL = "https://signetify.com"
+DEMO_PADES = """<section class="band" id="demo"><div class="wrap"><div class="sec-head"><div class="kick">Try it now</div><h2>Sign a PDF in your browser. Nothing leaves your machine.</h2><p class="lead">Choose a PDF or a sample. We sign it, verify the signature, then tamper a byte so you can watch verification fail. The signing runs entirely client-side in the demo; classical signatures here, the post-quantum path is the product.</p></div><div class="card" style="padding:0;overflow:hidden;border-radius:14px"><iframe src="https://signetstack.github.io/signet-pades-demo/" title="Signet PAdES live signing demo" loading="lazy" style="display:block;width:100%;height:740px;border:0;background:#fff" sandbox="allow-scripts allow-same-origin allow-downloads" referrerpolicy="no-referrer"></iframe></div><p class="muted" style="margin-top:12px;font-size:.85rem">Demo hosted at <code>signetstack.github.io/signet-pades-demo</code>. If the iframe is blocked, <a href="https://signetstack.github.io/signet-pades-demo/" target="_blank" rel="noopener">open it in a new tab</a>.</p></div></section>"""
 
 # ---- The Signet Data Trust Network Platform (canonical, from SDTNP) ----
 PA, PAB, PAD = "#6E8AFF", "#9DB4FF", "#3D5BD9"   # one signature accent for the whole platform
@@ -298,7 +299,7 @@ INSIGHTS = [
  {"slug":"house-of-brands","title":"Why we built SignetStack Labs as a house of brands","date":"May 2026","author":"SignetStack Labs",
   "excerpt":"One proven core, many specialist brands — and why that structure compounds.",
   "body":["The hardest parts of frontier technology — speed, safety, learning, operational maturity — are expensive to build once and wasteful to rebuild per market.",
-          "SignetStack Labs is structured so that the proven core is built once and inherited by every brand. Velocity proves it in trading; PQC, AI Governance and DXP carry the same engineering discipline into their own domains.",
+          "SignetStack Labs is structured so that the proven core is built once and inherited by every brand. PQC, AI Governance and DXP carry the same engineering discipline into their own domains; the independent venture Velocity Quant Technologies, separately owned, applies that discipline in trading.",
           "The result is a family that grows by extension, not by starting over — and every improvement to the shared foundation lifts every brand at once."]},
  {"slug":"pqc-readiness","title":"Post-quantum readiness: why crypto-agility matters now","date":"Apr 2026","author":"SignetStack PQC",
   "excerpt":"You don't migrate to post-quantum cryptography overnight. You make it swappable.",
@@ -312,11 +313,11 @@ INSIGHTS = [
           "Governance should reduce how often a human must intervene, never the human's ultimate authority."]},
 ]
 
-ROLES = [("Senior Systems Engineer (Low-Latency)","SignetStack Velocity","Remote / London"),
-         ("Applied Cryptographer","SignetStack PQC","Remote"),
+ROLES = [("Applied Cryptographer","SignetStack PQC","Remote"),
          ("ML Governance Lead","SignetStack AI Governance","Remote / London"),
          ("Senior Frontend Engineer","SignetStack DXP","Remote"),
-         ("Founding Brand Designer","SignetStack Labs","Remote / London")]
+         ("Founding Brand Designer","SignetStack Labs","Remote / London"),
+         ("Senior Systems Engineer (Low-Latency)","Velocity Quant Technologies","Remote / London")]
 
 # ---------------- master mark SVG (inline, neutral) ----------------
 import math
@@ -615,18 +616,19 @@ def brand_card(slug):
 
 def arch_diagram(highlight=None):
     """Responsive CSS house-of-brands diagram (replaces the legacy PNG poster)."""
-    def node(name, kick, desc, color, slug=None, sister=False):
+    def node(name, kick, desc, color, slug=None, sister=False, independent=False):
         hl = " an-hl" if slug and slug == highlight else ""
-        sis = " an-sister" if sister else ""
-        tag = '<span class="an-tag">Sister company</span>' if sister else ""
+        sis = " an-sister" if (sister or independent) else ""
+        tag = ('<span class="an-tag">Sister company</span>' if sister
+               else '<span class="an-tag">Independent venture</span>' if independent else "")
         return (f'<div class="arch-node{sis}{hl}" style="--c:{color}">{tag}'
                 f'<div class="an-name">{name}</div><div class="an-kick">{kick}</div>'
                 f'<div class="an-desc">{desc}</div></div>')
     children = (
         node(PLATFORM['short'], "The platform", "Post-quantum data-trust platform &amp; its modules.", PA, slug="platform")
-        + node("SignetStack Velocity™", DIV['velocity']['kicker'], "Microsecond execution — HFT V5 Omni.", DIV['velocity']['accent'], slug="velocity")
         + node("SignetStack DXP™", DIV['dxp']['kicker'], "Composable, agent-first experience platform.", DIV['dxp']['accent'], slug="dxp")
         + node("SignetStack R&amp;D™", DIV['research']['kicker'], "Cryptography research — invented &amp; proven here.", DIV['research']['accent'], slug="research")
+        + node("Velocity Quant Technologies™", DIV['velocity']['kicker'], "Microsecond execution, HFT V5 Omni. Separately owned.", DIV['velocity']['accent'], slug="velocity", independent=True)
         + node(f"{SISTER['name']}™", "No-code · signetify.com", SISTER['tagline'], SISTER['accent'], sister=True)
     )
     sub = "color:var(--mut2);font-size:.72rem;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:8px"
@@ -635,7 +637,7 @@ def arch_diagram(highlight=None):
             f'<div style="{sub}">Master brand · one proven core</div></div></div>'
             f'<div class="arch-stem"></div><div class="arch-bus"></div>'
             f'<div class="arch-row">{children}</div>'
-            f'<div class="arch-cap">One neutral master brand — the Signet Data Trust Network Platform, specialist brands &amp; sister Signetify, all on one post-quantum core.</div></div>')
+            f'<div class="arch-cap">One neutral master brand: the Signet Data Trust Network Platform and its specialist brands on one post-quantum core, alongside sister company Signetify and the independent venture Velocity Quant Technologies.</div></div>')
 
 # ---------------- PAGES ----------------
 def build():
@@ -664,7 +666,7 @@ def build():
 <div class="sister" style="margin-top:20px"><img class="sister-ico" src="assets/marks/signetify-icon.svg" alt="Signetify"><div><div class="kick" style="color:{SISTER['accent']}">Sister company</div><h3 style="font-size:1.3rem;margin:.2em 0">{SISTER['name']}™ — {SISTER['tagline']}</h3><p class="muted" style="max-width:62ch">The no-code website &amp; storefront builder, live at signetify.com.</p></div><a class="btn btn-ghost" href="signetify.html" style="margin-left:auto;--accent:{SISTER['accent']}">Learn more →</a></div>
 </div></section>
 <section class="band"><div class="wrap"><div class="split">
-<div><div class="kick" style="color:{DIV['velocity']['deep']}">Flagship · SignetStack Velocity</div>
+<div><div class="kick" style="color:{DIV['velocity']['deep']}">Independent venture · Velocity Quant Technologies</div>
 <h2>HFT V5 Omni™</h2><p class="lead" style="margin:.5em 0 1em">A production, institutional-grade high-frequency trading engine — the fifth generation of a platform run live on real capital for eighteen months, with V5 itself in production for the last eight.</p>
 <div class="statrow">{vstat}</div>
 <div class="cta" style="margin-top:26px"><a class="btn btn-ghost" href="v5-omni.html">See the engine →</a></div></div>
@@ -683,7 +685,7 @@ def build():
 <section class="band"><div class="wrap"><div class="split">
 <div><div class="kick">The model</div><h2>One core, many products</h2>
 <p class="lead" style="margin-top:.6em">The expensive, precision-engineered part — cryptography, safety, provability, operational maturity — never gets rebuilt. Each product is a specialist application of the same proven foundation, the way you swap the head on a precision tool but never the motor.</p>
-<p class="muted" style="margin-top:1em">The Signet Data Trust Network Platform proves what happened to regulated data; SignetStack Velocity brings the same rigour to ultra-low-latency trading; SignetStack DXP to digital experience; and our sister product Signetify makes it approachable as no-code. More will follow — each on the same core.</p></div>
+<p class="muted" style="margin-top:1em">The Signet Data Trust Network Platform proves what happened to regulated data; SignetStack DXP brings the same rigour to digital experience; and our sister product Signetify makes it approachable as no-code. More will follow, each on the same core. The independent venture Velocity Quant Technologies, separately owned, applies the same engineering discipline to ultra-low-latency trading.</p></div>
 <div>{arch_diagram()}</div></div></div></section>
 <section><div class="wrap"><div class="sec-head"><div class="kick">Principles</div><h2>How we operate</h2></div>
 <div class="grid g3">
@@ -741,6 +743,8 @@ def build():
     # MODULE PAGES
     for k in MODULE_ORDER:
         m = MODULES[k]
+        demo_cta = '<a class="btn btn-primary" href="#demo">Try the live demo</a>' if k == "pades" else ""
+        demo_sec = DEMO_PADES if k == "pades" else ""
         mcaps = "".join(f'<div class="cap"><div class="dot">{i+1:02d}</div><h4>{t}</h4><p>{p}</p></div>' for i, (t, p) in enumerate(m["caps"]))
         mtags = "".join(f'<span class="tag">{t}</span>' for t in m.get("tags", []))
         tag_sec = f'<section><div class="wrap"><div class="sec-head"><div class="kick">Standards &amp; alignment</div><h2>What it speaks</h2></div><div class="tags-row">{mtags}</div></div></section>' if m.get("tags") else ""
@@ -749,12 +753,13 @@ def build():
 <div class="iconbox lg" style="color:{PA};margin-bottom:16px">{icon_svg(m['icon'])}</div>
 <div class="kick eyebrow">{m['kicker']}</div><h1>{m['name']}™</h1>
 <p class="lead" style="max-width:60ch;margin-top:.4em">{m['tagline']}</p>
-<div class="cta"><a class="btn btn-primary" href="contact.html">Talk to us</a><a class="btn btn-ghost" href="platform.html">← The platform</a></div></div></section>
+<div class="cta">{demo_cta}<a class="btn btn-primary" href="contact.html">Talk to us</a><a class="btn btn-ghost" href="platform.html">← The platform</a></div></div></section>
 <section class="band"><div class="wrap"><div class="sec-head"><div class="kick">Overview</div><h2>{m['tagline']}</h2><p class="lead">{m['overview']}</p></div></div></section>
 <section><div class="wrap"><div class="sec-head"><div class="kick">Capabilities</div><h2>What it delivers</h2></div><div class="grid g3">{mcaps}</div></div></section>
 {tag_sec}
 <section{' class="band"' if not m.get('tags') else ''}><div class="wrap"><div class="sec-head"><div class="kick">Status, stated honestly</div></div><div class="statusbox">{m['status']}</div>
 <div class="relbox">Part of the <a href="platform.html" style="color:{PA}">Signet Data Trust Network Platform</a> — built on Signet Core and the platform's shared cryptographic foundation.</div></div></section>
+{demo_sec}
 <section class="band"><div class="wrap" style="text-align:center"><h2>{m['tagline']}</h2><div class="cta" style="justify-content:center;margin-top:22px"><a class="btn btn-primary" href="contact.html">Talk to us</a></div></div></section>
 """
         page(f"{mslug(k)}.html", f"{m['name']} — {m['kicker']}", m["overview"][:150], mbody, "platform", (PA, PAB, PAD))
@@ -942,9 +947,9 @@ def build():
     v = DIV["velocity"]
     steps = [("Watch","Reads every venue at once, far faster than any human."),("Decide","Three independent layers of intelligence must all agree."),("Act","Fast execution inside a hard, automatic safety perimeter."),("Learn","Feeds every real outcome back; detects drift; retrains.")]
     omni = f"""
-<section class="hero"><div class="wrap"><div class="kick eyebrow" style="color:{v['deep']}">SignetStack Velocity · Flagship</div>
+<section class="hero"><div class="wrap"><div class="kick eyebrow" style="color:{v['deep']}">Velocity Quant Technologies · Flagship</div>
 <h1>HFT V5 Omni™</h1><p class="lead" style="max-width:62ch">A production, institutional-grade high-frequency trading engine: it watches markets in microseconds, decides with a layered intelligence stack, executes with sub-millisecond latency under a hard-wired safety framework, and learns from every outcome.</p>
-<div class="cta"><a class="btn btn-primary" href="contact.html">Request a briefing</a><a class="btn btn-ghost" href="velocity.html">← SignetStack Velocity</a></div></div></section>
+<div class="cta"><a class="btn btn-primary" href="contact.html">Request a briefing</a><a class="btn btn-ghost" href="velocity.html">← Velocity Quant Technologies</a></div></div></section>
 <section><div class="wrap"><div class="statrow">{''.join(f'<div class="stat"><div class="n mono">{n}</div><div class="l">{l}</div></div>' for n,l in v['stats'])}</div></div></section>
 <section class="band"><div class="wrap"><div class="sec-head"><div class="kick">How it works</div><h2>Watch · Decide · Act · Learn</h2></div>
 <div class="grid g4">{''.join(f'<div class="cap"><div class="dot">{i+1}</div><h4>{t}</h4><p>{p}</p></div>' for i,(t,p) in enumerate(steps))}</div></div></section>
@@ -954,7 +959,7 @@ def build():
 <div class="cap"><h4 class="mono" style="color:{v['deep']}">~340 µs</h4><p>Order dispatch to exchange acknowledgement, on a real order.</p></div>
 <div class="cap"><h4 class="mono" style="color:{v['deep']}">1,971 / 0</h4><p>Tests passing with zero failures and zero findings under four memory/threading safety tools.</p></div>
 </div>
-<p class="muted" style="margin-top:20px;font-size:.88rem">Figures are SignetStack Velocity's own measured, reproducible results (verified May 2026). Market-size and third-party figures, where referenced elsewhere, are independent estimates cited for context.</p></div></section>
+<p class="muted" style="margin-top:20px;font-size:.88rem">Figures are Velocity Quant Technologies's own measured, reproducible results (verified May 2026). Market-size and third-party figures, where referenced elsewhere, are independent estimates cited for context.</p></div></section>
 <section class="band"><div class="wrap"><div class="split">
 <div><div class="kick">Trust</div><h2>When something goes wrong, it stops itself</h2>
 <p class="muted" style="margin-top:.7em">An 18-trigger circuit breaker, a dead-man's switch and continuous capital reconciliation halt trouble automatically. The engine never custodies client funds — capital stays in the institution's own accounts, and access can be revoked instantly. Eighteen months live with zero capital loss attributable to a software defect.</p></div>
@@ -962,7 +967,7 @@ def build():
 <p class="muted" style="margin-top:.7em">The same proven core extends to FX, equities, commodities and indices as interchangeable plugins — extension, not rebuild. The first market pays for the core; every market after is mostly upside.</p></div>
 </div></div></section>
 """
-    page("v5-omni.html", "HFT V5 Omni — SignetStack Velocity", "The institutional-grade HFT engine behind SignetStack Velocity.", omni, "brands", divvars("velocity"))
+    page("v5-omni.html", "HFT V5 Omni — Velocity Quant Technologies", "The institutional-grade HFT engine behind Velocity Quant Technologies.", omni, "brands", divvars("velocity"))
 
     # SIGNETIFY (sister company) — enriched from the Storefront product docs (public-safe)
     sig_vp = "".join(f'<div><span class="mono">{a}</span>{b}</div>' for a, b in
