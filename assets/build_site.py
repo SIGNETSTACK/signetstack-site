@@ -604,7 +604,27 @@ def page(fname, title, desc, body, active="", accentvars=None):
     # canonical URL (extensionless) for this page
     slug = fname[:-5]
     canon = "https://signetstack.io/" + ("" if slug == "index" else slug)
-    out = out.replace("</head>", f'<link rel="canonical" href="{canon}">\n<meta property="og:url" content="{canon}"></head>', 1)
+    og_img = "https://signetstack.io/assets/img/og-card.png"
+    et, ed = html.escape(title, quote=True), html.escape(desc, quote=True)
+    head_extra = (
+        f'<link rel="canonical" href="{canon}">'
+        f'<meta property="og:type" content="website">'
+        f'<meta property="og:site_name" content="SignetStack Labs">'
+        f'<meta property="og:url" content="{canon}">'
+        f'<meta property="og:title" content="{et}">'
+        f'<meta property="og:description" content="{ed}">'
+        f'<meta property="og:image" content="{og_img}">'
+        f'<meta property="og:image:secure_url" content="{og_img}">'
+        f'<meta property="og:image:type" content="image/png">'
+        f'<meta property="og:image:width" content="1200">'
+        f'<meta property="og:image:height" content="630">'
+        f'<meta property="og:image:alt" content="SignetStack Labs">'
+        f'<meta name="twitter:card" content="summary_large_image">'
+        f'<meta name="twitter:title" content="{et}">'
+        f'<meta name="twitter:description" content="{ed}">'
+        f'<meta name="twitter:image" content="{og_img}">'
+    )
+    out = out.replace("</head>", head_extra + "</head>", 1)
     # clean URLs: drop .html from internal page links (files stay flat; Pages serves /company -> company.html).
     # Skips external links (have ://), assets (.css/.svg/.png/.js), mailto, and anchors with a path slash.
     out = re.sub(r'href="index\.html(#[^"]*)?"', lambda m: f'href="/{m.group(1) or ""}"', out)
