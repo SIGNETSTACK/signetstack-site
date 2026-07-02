@@ -539,7 +539,13 @@ def head(title, desc):
 
 def navbar(active=""):
     def cls(n): return ' class="active"' if n == active else ''
-    pit = "".join(f'<a href="{mslug(k)}.html"><span class="mi" style="color:{PA}">{icon_svg(MODULES[k]["icon"])}</span><span>{MODULES[k]["name"]}™<br><span class="dom">{MODULES[k]["kicker"]}</span></span></a>' for k in MODULE_ORDER)
+    pit = ""
+    for k in MODULE_ORDER:
+        dom, href = MODULES[k]["kicker"], f'{mslug(k)}.html'
+        if k == "pades":  # PAdES ships a live in-browser signing demo — highlight it like Forge.
+            dom += ' · <span style="color:var(--accent)">Live demo</span>'
+            href = 'pades.html#demo'
+        pit += f'<a href="{href}"><span class="mi" style="color:{PA}">{icon_svg(MODULES[k]["icon"])}</span><span>{MODULES[k]["name"]}™<br><span class="dom">{dom}</span></span></a>'
     # Shared components with their own surfaces (live demos / standalone pages) get a slot too.
     pit += f'<a href="signet-forge.html"><span class="mi" style="color:{PA}">{icon_svg("forge")}</span><span>Signet Forge™<br><span class="dom">Encrypted Parquet · Live WASM demo</span></span></a>'
     bit = "".join(f'<a href="{slug}.html"><svg>{{{slug}}}</svg><span>{DIV[slug]["name"]}™<br><span class="dom">{DIV[slug]["kicker"]}</span></span></a>' for slug in ORDER)
@@ -558,6 +564,7 @@ def navbar(active=""):
 
 def footer():
     plinks = "".join(f'<li><a href="{mslug(k)}.html">{MODULES[k]["name"]}™</a></li>' for k in MODULE_ORDER[:6])
+    plinks += '<li><a href="pades.html#demo">Signet PAdES™ <span style="color:var(--accent)">· demo</span></a></li>'
     plinks += '<li><a href="signet-forge.html">Signet Forge™ <span style="color:var(--accent)">· demo</span></a></li>'
     blinks = "".join(f'<li><a href="{s}.html">{DIV[s]["name"]}™</a></li>' for s in ORDER)
     return f"""<footer><div class="wrap">
