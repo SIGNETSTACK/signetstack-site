@@ -589,6 +589,10 @@ EMAIL_DECODER_JS = ("<script>document.querySelectorAll('a.eml[data-e]').forEach(
     "if(a.getAttribute('data-show')!=='0')a.textContent=e;}catch(x){}});</script>")
 
 def page(fname, title, desc, body, active="", accentvars=None):
+    # Floor the meta/OG description at 100+ chars — LinkedIn and search engines warn
+    # on short descriptions, and some short/legal pages would otherwise fall under.
+    if len(desc) < 100:
+        desc = (desc.rstrip(" .") + ". SignetStack Labs builds frontier post-quantum cryptography and data-trust technology on one proven cryptographic core.").strip()
     style = ""
     if accentvars:
         a, b, dp = accentvars
@@ -702,7 +706,7 @@ def build():
 <section><div class="wrap"><div class="sec-head"><div class="kick">Insights</div><h2>From the workshop</h2></div>
 <div class="grid g3">{ins_cards}</div></div></section>
 """
-    page("index.html", "SignetStack Labs: Frontier technology, one proven core", COMPANY['tagline'], home, "home")
+    page("index.html", "SignetStack Labs: Frontier technology, one proven core", "A house of frontier-technology brands — the Signet Data Trust Network Platform, its specialist brands and Signetify — built on one proven, post-quantum cryptographic core.", home, "home")
 
     # COMPANY
     comp = f"""
