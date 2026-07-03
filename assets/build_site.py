@@ -614,6 +614,7 @@ def page(fname, title, desc, body, active="", accentvars=None):
         f'<link rel="canonical" href="{canon}">'
         f'<meta property="og:type" content="website">'
         f'<meta property="og:site_name" content="SignetStack Labs">'
+        f'<meta name="author" content="SignetStack Labs">'
         f'<meta property="og:url" content="{canon}">'
         f'<meta property="og:title" content="{et}">'
         f'<meta property="og:description" content="{ed}">'
