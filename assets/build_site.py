@@ -42,6 +42,23 @@ DIV = {  # slug -> enriched page data, sourced from each project's docs (public-
    "stats": [("18 mo","live on real money · V1→V5"),("~9 µs","median decision latency"),
              ("1,971","tests · 0 failures · 4 safety tools"),("$0","defect-attributable capital loss")],
    "flagship": True},
+ "calibriq": {"key": "signetstack-calibriq", "name": "CalibrIQ", "domain": "CalibrIQ",
+   "kicker": "Verifiable AI Ratings · Solana", "accent": "#14F195", "bright": "#5FF7B4", "deep": "#0B8F57",
+   "tagline": "The credit bureau for autonomous financial agents.",
+   "overview": "CalibrIQ is an independent venture building verifiable reliability ratings for autonomous financial agents. Each rating is earned from an agent's measured, on-chain track record, not a self-declared score, and resolves to an Attested Cognition Decision Proof (ACDP) anchored on Solana, so a counterparty can check it inside a payment's time budget. CalibrIQ licenses the Signet Stack post-quantum core for its attestation and signing path; the “Secured by Signet Stack Core” endorsement ships once that integration is verified, as a launch gate rather than a claim.",
+   "caps": [("Calibration, not opinion","A rating is only as good as its calibration: when CalibrIQ says an agent is 90% reliable, that is measured against realised outcomes and continuously back-scored, never a static badge."),
+            ("Attested decision proofs","Every rating resolves to an ACDP, a signed, verifiable proof of the agent's decision history, so a lender or venue checks the evidence, not a claim."),
+            ("Verifiable on-chain","Ratings anchor on Solana, checkable by any counterparty inside a transaction's time budget, with no trusted middleman in the path."),
+            ("Secured by Signet Stack Core","The attestation and signing path licenses the Signet Stack post-quantum core, the same engine that secures the platform, so proofs are quantum-resilient by construction."),
+            ("Built for autonomous finance","Designed for the coming wave of AI agents that borrow, lend, settle and transact on their own behalf, where identity is cheap and reputation must be earned.")],
+   "audience": ["Lenders & credit desks underwriting autonomous-agent counterparties","Payment & settlement venues gating agent access on verified reliability","Agent operators who want a portable, earned reliability record","Treasuries pricing counterparty risk for agentic settlement"],
+   "diffs": [("Earned, not self-declared","A CalibrIQ rating is derived from measured outcomes, not an agent asserting its own trustworthiness."),
+             ("Proof, not a score alone","The ACDP behind every rating is independently verifiable; the number is backed by cryptographic evidence, not a reputation database."),
+             ("Core-secured","Attestation runs on the licensed Signet Stack post-quantum core, so the proofs are quantum-resilient rather than dependent on classical signatures alone.")],
+   "tags": [], "status": "CalibrIQ is an early-stage, independent venture, gated on Velocity's HFT V5 Omni and on the verified integration of the Signet Stack post-quantum core. Until that integration ships and is verified, the “Secured by Signet Stack Core” endorsement is withheld and the status reads “Signet Core PQC integration, launch gate, in progress.”",
+   "stats": [("ACDP","calibration-backed rating proof"),("Solana","on-chain, sub-second verify"),
+             ("PQC","core-secured attestation"),("Pre-seed","independent venture · gated on V5")],
+   "flagship": False},
  "pqc": {"key": "signetstack-pqc", "name": "SignetStack PQC", "domain": "PQC",
    "kicker": "Post-Quantum Cryptography", "accent": "#8B5CF6", "bright": "#A78BFA", "deep": "#5B3FC0",
    "tagline": "Quantum-resistant by default. Crypto-agile by design.",
@@ -142,7 +159,9 @@ DIV = {  # slug -> enriched page data, sourced from each project's docs (public-
    "stats": [("3","NIST PQC standards in use: ML-KEM, ML-DSA, SLH-DSA"),("4","active research tracks"),("CPU · GPU · edge","hardware-adaptive crypto targets"),("Proof-first","reproducible, hash-chained results")],
    "flagship": False},
 }
-ORDER = ["dxp", "research", "velocity"]   # SignetStack product brands (besides the platform)
+PLATFORM_BRANDS = ["dxp", "research"]       # platform product marks / lines of Signet Stack Ltd
+VENTURES = ["velocity", "calibriq"]          # separate operating companies · Secured by Signet Stack Core
+ORDER = PLATFORM_BRANDS + VENTURES           # every brand page / nav / footer / mark iterates this
 SIGNETIFY_URL = "https://signetify.com"
 DEMO_PADES = """<section class="band" id="demo"><div class="wrap"><div class="sec-head"><div class="kick">Try it now</div><h2>Sign a PDF in your browser. Nothing leaves your machine.</h2><p class="lead">Choose a PDF or a sample. We sign it, verify the signature, then tamper a byte so you can watch verification fail. The signing runs entirely client-side in the demo; classical signatures here, the post-quantum path is the product.</p></div><div class="card" style="padding:0;overflow:hidden;border-radius:14px"><iframe src="https://signetstack.github.io/signet-pades-demo/" title="Signet PAdES live signing demo" loading="lazy" style="display:block;width:100%;height:740px;border:0;background:#fff" sandbox="allow-scripts allow-same-origin allow-downloads" referrerpolicy="no-referrer"></iframe></div><p class="muted" style="margin-top:12px;font-size:.85rem">Demo hosted at <code>signetstack.github.io/signet-pades-demo</code>. If the iframe is blocked, <a href="https://signetstack.github.io/signet-pades-demo/" target="_blank" rel="noopener">open it in a new tab</a>.</p></div></section>"""
 
@@ -292,7 +311,7 @@ def social_row():
     return "".join(f'<a href="{u}" target="_blank" rel="noopener" aria-label="{n}"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">{SOCIAL_ICONS[k]}</svg></a>' for n, u, k in SOCIAL)
 
 SISTER = {"name": "Signetify", "accent": "#00A6C2", "bright": "#2BC4DD", "deep": "#0E91A8", "gold": "#FACD2A",
-   "tagline": "The trust layer for the agentic web.",
+   "tagline": "The agentic-commerce OS.",
    "blurb": "Signetify is a sister company in the Signet Stack family, the AI-native platform for building, running and growing online businesses, where you and an AI agent are equal collaborators on the same live site, and every asset and transaction carries built-in, verifiable provenance."}
 
 INSIGHTS = [
@@ -653,15 +672,19 @@ def arch_diagram(highlight=None):
         sis = " an-sister" if (sister or independent) else ""
         tag = ('<span class="an-tag">Sister company</span>' if sister
                else '<span class="an-tag">Independent venture</span>' if independent else "")
+        endorse = ('<div style="margin-top:8px;font-size:.6rem;font-weight:700;letter-spacing:.4px;'
+                   'text-transform:uppercase;color:var(--mut2);opacity:.9">Secured by Signet Stack Core</div>'
+                   if independent else "")
         return (f'<div class="arch-node{sis}{hl}" style="--c:{color}">{tag}'
                 f'<div class="an-name">{name}</div><div class="an-kick">{kick}</div>'
-                f'<div class="an-desc">{desc}</div></div>')
+                f'<div class="an-desc">{desc}</div>{endorse}</div>')
     children = (
         node(PLATFORM['short'], "The platform", "Post-quantum data-trust platform &amp; its modules.", PA, slug="platform")
         + node("SignetStack DXP™", DIV['dxp']['kicker'], "Composable, agent-first experience platform.", DIV['dxp']['accent'], slug="dxp")
         + node("SignetStack R&amp;D™", DIV['research']['kicker'], "Cryptography research, invented &amp; proven here.", DIV['research']['accent'], slug="research")
         + node("Velocity Quant Technologies™", DIV['velocity']['kicker'], "Microsecond execution, HFT V5 Omni. Separately owned.", DIV['velocity']['accent'], slug="velocity", independent=True)
-        + node(f"{SISTER['name']}™", "No-code · signetify.com", SISTER['tagline'], SISTER['accent'], sister=True)
+        + node("CalibrIQ™", DIV['calibriq']['kicker'], "Verifiable reliability ratings for autonomous agents, on Solana. Separately owned.", DIV['calibriq']['accent'], slug="calibriq", independent=True)
+        + node(f"{SISTER['name']}™", "Agentic commerce · signetify.com", SISTER['tagline'], SISTER['accent'], sister=True)
     )
     sub = "color:var(--mut2);font-size:.72rem;font-weight:600;letter-spacing:.6px;text-transform:uppercase;margin-top:8px"
     return (f'<div class="archd"><div class="arch-master"><div class="an-master">'
@@ -669,7 +692,7 @@ def arch_diagram(highlight=None):
             f'<div style="{sub}">Master brand · one proven core</div></div></div>'
             f'<div class="arch-stem"></div><div class="arch-bus"></div>'
             f'<div class="arch-row">{children}</div>'
-            f'<div class="arch-cap">One neutral master brand: the Signet Data Trust Network Platform and its specialist brands on one post-quantum core, alongside sister company Signetify and the independent venture Velocity Quant Technologies.</div></div>')
+            f'<div class="arch-cap">Two layers on one post-quantum core. The <strong>platform</strong> &mdash; the Signet Data Trust Network Platform and its specialist brands, product lines of Signet Stack Ltd. And the <strong>ventures</strong> &mdash; separate companies that each license the core and carry the &ldquo;Secured by Signet Stack Core&rdquo; endorsement: sister company Signetify, Velocity Quant Technologies and CalibrIQ.</div></div>')
 
 # ---------------- PAGES ----------------
 def build():
@@ -693,8 +716,10 @@ def build():
 <p class="lead" style="margin-top:1em">{PLATFORM['overview']}</p></div>
 <div class="grid g3">{modgrid}</div>
 <div class="cta" style="margin-top:26px"><a class="btn btn-primary" href="platform.html" style="--accent:{PA}">See the whole platform →</a></div></div></section>
-<section><div class="wrap"><div class="sec-head"><div class="kick">The brands</div><h2>Specialist brands on the same core</h2></div>
-<div class="grid g2">{''.join(brand_card(s) for s in ORDER)}</div>
+<section><div class="wrap"><div class="sec-head"><div class="kick">The platform brands</div><h2>Specialist brands on the same core</h2></div>
+<div class="grid g2">{''.join(brand_card(s) for s in PLATFORM_BRANDS)}</div>
+<div class="sec-head" style="margin-top:38px"><div class="kick">The ventures · Secured by Signet Stack Core</div><h2>Separate companies, one proven core</h2></div>
+<div class="grid g2">{''.join(brand_card(s) for s in VENTURES)}</div>
 <div class="sister" style="margin-top:20px"><img class="sister-ico" src="assets/marks/signetify-icon.svg" alt="Signetify"><div><div class="kick" style="color:{SISTER['accent']}">Sister company</div><h3 style="font-size:1.3rem;margin:.2em 0">{SISTER['name']}™, {SISTER['tagline']}</h3><p class="muted" style="max-width:62ch">The no-code website &amp; storefront builder, live at signetify.com.</p></div><a class="btn btn-ghost" href="signetify.html" style="margin-left:auto;--accent:{SISTER['accent']}">Learn more →</a></div>
 </div></section>
 <section class="band"><div class="wrap"><div class="split">
@@ -717,7 +742,7 @@ def build():
 <section class="band"><div class="wrap"><div class="split">
 <div><div class="kick">The model</div><h2>One core, many products</h2>
 <p class="lead" style="margin-top:.6em">The expensive, precision-engineered part, cryptography, safety, provability, operational maturity, never gets rebuilt. Each product is a specialist application of the same proven foundation, the way you swap the head on a precision tool but never the motor.</p>
-<p class="muted" style="margin-top:1em">The Signet Data Trust Network Platform proves what happened to regulated data; SignetStack DXP brings the same rigour to digital experience; and our sister product Signetify makes it approachable as no-code. More will follow, each on the same core. The independent venture Velocity Quant Technologies, separately owned, applies the same engineering discipline to ultra-low-latency trading.</p></div>
+<p class="muted" style="margin-top:1em">The Signet Data Trust Network Platform proves what happened to regulated data; SignetStack DXP brings the same rigour to digital experience; and our sister company Signetify makes it approachable as the agentic-commerce OS. More will follow, each on the same core. Two of our companies are separate ventures that license the same core: Velocity Quant Technologies applies it to ultra-low-latency trading, and CalibrIQ to verifiable reliability ratings for autonomous financial agents on Solana. Each is separately owned and carries the “Secured by Signet Stack Core” endorsement once its integration is verified.</p></div>
 <div>{arch_diagram()}</div></div></div></section>
 <section><div class="wrap"><div class="sec-head"><div class="kick">Principles</div><h2>How we operate</h2></div>
 <div class="grid g3">
@@ -918,8 +943,8 @@ def build():
     sigcard = f'<a class="brandcard card" href="{SIGNETIFY_URL}" target="_blank" rel="noopener" style="--bd:{SISTER["deep"]};--bb:{SISTER["bright"]};--ba:{SISTER["accent"]}"><span class="top"></span><img src="assets/marks/signetify-icon.svg" style="width:54px;height:54px;border-radius:12px;margin-bottom:16px" alt="Signetify"><h3>Signetify™</h3><div class="dom" style="color:{SISTER["accent"]}">Sister company · signetify.com</div><p>{SISTER["tagline"]}</p><div class="more" style="color:{SISTER["bright"]}">Visit signetify.com ↗</div></a>'
     hub = f"""
 <section class="hero"><div class="wrap"><div class="kick eyebrow">Platform &amp; brands</div>
-<h1>One core. A platform, specialist brands, and a sister company.</h1>
-<p class="lead">SignetStack Labs organises its work into the Signet Data Trust Network Platform and a set of specialist brands, all on one proven, post-quantum core, and growing.</p></div></section>
+<h1>One core. A platform, specialist brands, and independent ventures.</h1>
+<p class="lead">SignetStack Labs organises its work in two layers on one proven, post-quantum core: the Signet Data Trust Network Platform with its specialist brands, and separate ventures &mdash; Signetify, Velocity and CalibrIQ &mdash; that each license the core and carry the “Secured by Signet Stack Core” endorsement.</p></div></section>
 <section><div class="wrap"><div class="grid g2">{platcard}{''.join(brand_card(s) for s in ORDER)}{sigcard}</div>
 <div class="card" style="margin-top:20px;text-align:center;border-style:dashed"><h3 style="font-size:1.1rem">More in the pipeline</h3><p class="muted">The core is built to carry new modules and brands. <a href="contact.html" style="color:var(--ink)">Partner with us →</a></p></div>
 </div></section>
@@ -1039,7 +1064,7 @@ def build():
 <section class="hero"><div class="wrap">
 <img class="sig-logo" src="assets/marks/signetify-logo.svg" alt="Signetify">
 <div class="kick eyebrow">Sister company · the Signet Stack family</div>
-<h1>The trust layer for the agentic web.</h1>
+<h1>The agentic-commerce OS.</h1>
 <p class="lead" style="max-width:62ch">{SISTER['blurb'].replace("Signetify","Signetify™",1)}</p>
 <div class="vp">{sig_vp}</div>
 <div class="cta" style="margin-top:30px"><a class="btn btn-primary" href="{SIGNETIFY_URL}" target="_blank" rel="noopener">Visit signetify.com →</a><a class="btn btn-ghost" href="contact.html">Get in touch</a></div>
@@ -1068,7 +1093,7 @@ def build():
 <h2>A store in minutes, regulator-ready from the first sale.</h2>
 <div class="cta" style="justify-content:center;margin-top:24px"><a class="btn btn-primary" href="{SIGNETIFY_URL}" target="_blank" rel="noopener">Visit signetify.com →</a><a class="btn btn-ghost" href="contact.html">Get in touch</a></div></div></section>
 """
-    page("signetify.html", "Signetify, the trust layer for the agentic web", SISTER['blurb'], sg, "", (SISTER['accent'], SISTER['bright'], SISTER['deep']))
+    page("signetify.html", "Signetify, the agentic-commerce OS", SISTER['blurb'], sg, "", (SISTER['accent'], SISTER['bright'], SISTER['deep']))
 
     # INSIGHTS
     idx = f"""<section class="hero"><div class="wrap"><div class="kick eyebrow">Insights</div><h1>From the workshop</h1><p class="lead">Notes on building frontier technology, speed, cryptography, governance and experience.</p></div></section>

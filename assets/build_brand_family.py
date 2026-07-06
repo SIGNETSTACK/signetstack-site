@@ -18,7 +18,7 @@ def rgb(t): return t[:3]
 BRANDS = [
     {"key": "signetstack-velocity", "name": "SignetStack Velocity", "desc": "ULTRA-LOW-LATENCY  ·  HFT",
      "accent": "#12C2C9", "bright": "#16E0D4", "deep": "#0B7C82", "glyph": "bars",
-     "folder": "SignetStack_Velocity_Brand_Kit", "accent_name": "Cyan",
+     "folder": "SignetStack_Velocity_Brand_Kit", "accent_name": "Cyan", "venture": True,
      "tagline": "Ultra-Low-Latency & High-Frequency Trading",
      "chip_style": "metric", "chips": [("18 mo", "live · V1→V5"), ("~9 µs", "decision"), ("1,971", "tests · 0 fail"), ("$0", "defect loss")]},
     {"key": "signetstack-pqc", "name": "SignetStack PQC", "desc": "POST-QUANTUM CRYPTOGRAPHY",
@@ -41,6 +41,11 @@ BRANDS = [
      "folder": "SignetStack_RnD_Brand_Kit", "accent_name": "Emerald",
      "tagline": "Cryptography research & advanced development",
      "chip_style": "tag", "chips": ["Post-quantum", "Crypto-agile", "Proof-first"]},
+    {"key": "signetstack-calibriq", "name": "CalibrIQ", "desc": "VERIFIABLE AI RATINGS  ·  SOLANA",
+     "accent": "#14F195", "bright": "#5FF7B4", "deep": "#0B8F57", "glyph": "gauge",
+     "folder": "SignetStack_CalibrIQ_Brand_Kit", "accent_name": "Solana Green", "venture": True,
+     "tagline": "The credit bureau for autonomous financial agents",
+     "chip_style": "tag", "chips": ["Calibration-backed", "On-chain ACDP", "Secured by Signet Stack Core"]},
 ]
 
 # ---------------- MARK (hexagon seal + glyph) ----------------
@@ -73,6 +78,19 @@ def draw_glyph(d, glyph, cx, cy, R, W, gcol, accent):
         for i, yy in enumerate([cy - off, cy, cy + off]):
             pts = [(cx, yy - hh), (cx + wh, yy), (cx, yy + hh), (cx - wh, yy), (cx, yy - hh)]
             d.line(pts, fill=accent if i == 2 else gcol, width=lw, joint="curve")
+    elif glyph == "gauge":
+        rr = R * 0.54; cyb = cy + R * 0.10; lw = max(2, int(W * 0.030))
+        arc = []; a = 180.0
+        while a <= 360.0001:
+            arc.append((cx + rr * math.cos(math.radians(a)), cyb + rr * math.sin(math.radians(a)))); a += 12
+        d.line(arc, fill=gcol, width=lw, joint="curve")
+        tw = max(2, int(W * 0.024))
+        for t in (180, 225, 270, 315, 360):
+            d.line([(cx + rr * 0.80 * math.cos(math.radians(t)), cyb + rr * 0.80 * math.sin(math.radians(t))),
+                    (cx + rr * math.cos(math.radians(t)), cyb + rr * math.sin(math.radians(t)))], fill=gcol, width=tw)
+        na = 312; nx = cx + rr * 0.88 * math.cos(math.radians(na)); ny = cyb + rr * 0.88 * math.sin(math.radians(na))
+        d.line([(cx, cyb), (nx, ny)], fill=accent, width=max(2, int(W * 0.034)))
+        hub = W * 0.055; d.ellipse([cx - hub, cyb - hub, cx + hub, cyb + hub], fill=accent)
 
 def draw_mark(size, hex_color, glyph_color, accent, glyph, SS=4):
     W = size * SS
@@ -126,6 +144,20 @@ def svg_glyph(glyph, gcol, accent):
             pts = f"{cx},{yy-hh:.1f} {cx+wh:.1f},{yy:.1f} {cx},{yy+hh:.1f} {cx-wh:.1f},{yy:.1f}"
             s += f'<polygon points="{pts}" fill="none" stroke="{accent if i==2 else gcol}" stroke-width="5.5" stroke-linejoin="round"/>'
         return s
+    if glyph == "gauge":
+        rr = R * 0.54; cyb = cy + 6; arc = []; a = 180.0
+        while a <= 360.0001:
+            arc.append((cx + rr * math.cos(math.radians(a)), cyb + rr * math.sin(math.radians(a)))); a += 15
+        path = "M " + " L ".join(f"{x:.1f},{y:.1f}" for x, y in arc)
+        ticks = "".join(
+            f'<line x1="{cx + rr*0.80*math.cos(math.radians(t)):.1f}" y1="{cyb + rr*0.80*math.sin(math.radians(t)):.1f}"'
+            f' x2="{cx + rr*math.cos(math.radians(t)):.1f}" y2="{cyb + rr*math.sin(math.radians(t)):.1f}"/>'
+            for t in (180, 225, 270, 315, 360))
+        na = 312; nx = cx + rr * 0.88 * math.cos(math.radians(na)); ny = cyb + rr * 0.88 * math.sin(math.radians(na))
+        return (f'<path d="{path}" fill="none" stroke="{gcol}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>'
+                f'<g stroke="{gcol}" stroke-width="3" stroke-linecap="round">{ticks}</g>'
+                f'<line x1="{cx}" y1="{cyb}" x2="{nx:.1f}" y2="{ny:.1f}" stroke="{accent}" stroke-width="4.5" stroke-linecap="round"/>'
+                f'<circle cx="{cx}" cy="{cyb}" r="6.5" fill="{accent}"/>')
     return ""
 
 def svg_mark(stroke, glyph, gcol, accent):
