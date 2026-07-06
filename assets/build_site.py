@@ -38,6 +38,15 @@ DIV = {  # slug -> enriched page data, sourced from each project's docs (public-
    "diffs": [("The moat is the combination","Any one capability exists somewhere; assembling microsecond speed, safe learning, structural safety and multi-asset extensibility in one live system takes a specialist team years."),
              ("Never custodies funds","Capital stays in the institution's own venue accounts; the access granted cannot move money off-exchange and can be revoked instantly."),
              ("Measured, not modelled","Latency and safety are demonstrable on demand with real orders and a standing test suite, not back-tested claims.")],
+   "editions": {"intro": "Velocity is one company-scale asset, the execution engine, not a catalogue of products. V5 and its successor generation are versions of that one engine; on-chain (DEX) connectivity is a module of it; and a shared trading-infrastructure layer is what every edition runs on. What a customer buys is an edition of the same core, a configuration and a commercial line, not a separate codebase, so every improvement to the engine lifts all of them at once.",
+     "items": [("Proprietary trading","Run the engine directly on the firm's own book."),
+               ("Broker · best-execution","Smart order routing and best-execution for a broker's client flow."),
+               ("Asset manager","Systematic, regime-aware execution for a fund."),
+               ("OTC desk","Principal or agency conversion at a better blended rate."),
+               ("Peer-to-peer","Peer-to-peer conversion rails."),
+               ("Cross-border","Treasury and FX-style cross-border settlement."),
+               ("Market data","The engine's microstructure signals delivered as a feed."),
+               ("Exchange · venue","Liquidity, market quality and member loyalty for a venue.")]},
    "tags": [], "status": "The engine has run live on real money for eighteen months across five generations and multiple cryptocurrency venues, with zero capital loss attributable to a software defect; the current generation, V5, has been in production for the last eight. The multi-asset roadmap (FX → equities → commodities → indices) extends the proven core rather than rebuilding it.",
    "stats": [("18 mo","live on real money · V1→V5"),("~9 µs","median decision latency"),
              ("1,971","tests · 0 failures · 4 safety tools"),("$0","defect-attributable capital loss")],
@@ -100,7 +109,7 @@ DIV = {  # slug -> enriched page data, sourced from each project's docs (public-
  "dxp": {"key": "signetstack-dxp", "name": "SignetStack DXP", "domain": "DXP",
    "kicker": "Digital Experience Platform", "accent": "#FF5C8A", "bright": "#FF85A8", "deep": "#C53E6A",
    "tagline": "The digital experience platform built for the agentic era.",
-   "overview": "SignetStack DXP is an enterprise, headless, agent-first digital experience platform, a composable content, commerce and AI substrate where compliance and auditability are built into the architecture, not bolted on. It serves any frontend, channel or AI agent through open APIs, with a tamper-evident audit trail woven into the core. Its no-code sibling product, Signetify, lives at signetify.com; SignetStack DXP is the enterprise platform underneath, for organisations that must power many frontends from one governed backend.",
+   "overview": "SignetStack DXP is an enterprise, headless, agent-first digital experience platform, a composable content, commerce and AI substrate where compliance and auditability are built into the architecture, not bolted on. It serves any frontend, channel or AI agent through open APIs, with a tamper-evident audit trail woven into the core. Signetify, the agentic-commerce OS from our sister company, lives at signetify.com; SignetStack DXP is the enterprise platform underneath, for organisations that must power many frontends from one governed backend.",
    "caps": [("Headless content","Content is served as structured data through a unified API; any frontend renders it however it wants, no presentation opinions in the backend."),
             ("Agent-first commerce","Native support for AI agents acting on a user's behalf, with cryptographically scoped, bounded authority and full attribution of every action."),
             ("Personalization & adaptive UX","Real-time, context-aware experiences driven by behavioural signals as a closed feedback loop, not a batch pipeline."),
@@ -315,11 +324,13 @@ SISTER = {"name": "Signetify", "accent": "#00A6C2", "bright": "#2BC4DD", "deep":
    "blurb": "Signetify is a sister company in the Signet Stack family, the AI-native platform for building, running and growing online businesses, where you and an AI agent are equal collaborators on the same live site, and every asset and transaction carries built-in, verifiable provenance."}
 
 INSIGHTS = [
- {"slug":"house-of-brands","title":"Why we built SignetStack Labs as a house of brands","date":"May 2026","author":"SignetStack Labs",
-  "excerpt":"One proven core, many specialist brands, and why that structure compounds.",
-  "body":["The hardest parts of frontier technology, speed, safety, learning, operational maturity, are expensive to build once and wasteful to rebuild per market.",
-          "SignetStack Labs is structured so that the proven core is built once and inherited by every brand. PQC, AI Governance and DXP carry the same engineering discipline into their own domains; the independent venture Velocity Quant Technologies, separately owned, applies that discipline in trading.",
-          "The result is a family that grows by extension, not by starting over, and every improvement to the shared foundation lifts every brand at once."]},
+ {"slug":"house-of-brands","title":"One core, two layers: the platform and its ventures","date":"May 2026","author":"SignetStack Labs",
+  "excerpt":"One proven core, organised in two layers, a platform and a set of ventures, and why that structure compounds.",
+  "body":["The hardest parts of frontier technology, speed, safety, learning, operational maturity, are expensive to build once and wasteful to rebuild per market. So we build the core once and inherit it everywhere.",
+          "That core is organised in two layers. The first is the platform, SignetStack Labs itself: the Signet Data Trust Network Platform and its specialist marks, PQC, AI Governance, DXP and R&D, which are product lines of one company, not separate companies. The second layer is the ventures, separate operating companies with their own names, domains and cap tables that each license the same core: Signetify, the agentic-commerce OS; Velocity Quant Technologies in trading; and CalibrIQ, the credit bureau for autonomous financial agents on Solana.",
+          "The ventures carry a 'Secured by Signet Stack Core' endorsement, applied only once the real integration ships, so each keeps its own brand while signalling the shared foundation underneath, the way a component maker's mark appears on a finished product without merging the two.",
+          "Real separation also isolates risk, not just brand. Money-movement activity, OTC, peer-to-peer, cross-border settlement and high-frequency trading, carries regulatory and balance-sheet tail-risk that must never touch the crown-jewel cryptographic core every product depends on. Housing it in its own entity ring-fences that risk away from the IP, and continues a separation the licensing model already draws.",
+          "The result is a family that grows by extension, not by starting over: every improvement to the shared core lifts the platform and every venture at once, while each venture ring-fences its own risk and raises on its own terms."]},
  {"slug":"pqc-readiness","title":"Post-quantum readiness: why crypto-agility matters now","date":"Apr 2026","author":"SignetStack PQC",
   "excerpt":"You don't migrate to post-quantum cryptography overnight. You make it swappable.",
   "body":["The migration to post-quantum cryptography is not a single switch, it is a multi-year programme across systems most organisations have never fully inventoried.",
@@ -589,7 +600,7 @@ def footer():
     return f"""<footer><div class="wrap">
 <div class="fgrid">
 <div><div class="flogo"><svg>{{master-white}}</svg>SignetStack Labs™</div>
-<p class="muted" style="font-size:.92rem;max-width:36ch">{COMPANY['tagline']} The Signet Data Trust Network Platform, specialist brands, and Signetify, built on one proven cryptographic core.</p>
+<p class="muted" style="font-size:.92rem;max-width:36ch">{COMPANY['tagline']} The Signet Data Trust Network Platform and its specialist brands, alongside independent ventures, built on one proven cryptographic core.</p>
 <p class="muted" style="font-size:.8rem;margin-top:12px">Registered office: {COMPANY['office']}</p>
 <div class="social">{social_row()}</div></div>
 <div><h5>Platform</h5><ul>{plinks}<li><a href="platform.html">All modules →</a></li></ul></div>
@@ -708,7 +719,7 @@ def build():
 <section class="hero"><div class="heromark"><svg>{{master-white}}</svg></div><div class="wrap">
 <div class="kick eyebrow">SignetStack Labs™ · a {COMPANY['legal']} company</div>
 <h1>Frontier technology, built on one proven core.</h1>
-<p class="lead">SignetStack Labs builds the Signet Data Trust Network Platform, a family of specialist brands, and the sister product Signetify, all on one hardened, post-quantum cryptographic core.</p>
+<p class="lead">SignetStack Labs builds the Signet Data Trust Network Platform and its specialist brands, alongside independent ventures &mdash; Signetify, Velocity and CalibrIQ &mdash; all on one hardened, post-quantum cryptographic core.</p>
 <div class="cta"><a class="btn btn-primary" href="platform.html">Explore the platform</a><a class="btn btn-ghost" href="company.html">About the company</a></div>
 </div></section>
 <section class="band"><div class="wrap"><div class="sec-head"><div class="kick" style="color:{PAD}">The platform</div>
@@ -720,7 +731,7 @@ def build():
 <div class="grid g2">{''.join(brand_card(s) for s in PLATFORM_BRANDS)}</div>
 <div class="sec-head" style="margin-top:38px"><div class="kick">The ventures · Secured by Signet Stack Core</div><h2>Separate companies, one proven core</h2></div>
 <div class="grid g2">{''.join(brand_card(s) for s in VENTURES)}</div>
-<div class="sister" style="margin-top:20px"><img class="sister-ico" src="assets/marks/signetify-icon.svg" alt="Signetify"><div><div class="kick" style="color:{SISTER['accent']}">Sister company</div><h3 style="font-size:1.3rem;margin:.2em 0">{SISTER['name']}™, {SISTER['tagline']}</h3><p class="muted" style="max-width:62ch">The no-code website &amp; storefront builder, live at signetify.com.</p></div><a class="btn btn-ghost" href="signetify.html" style="margin-left:auto;--accent:{SISTER['accent']}">Learn more →</a></div>
+<div class="sister" style="margin-top:20px"><img class="sister-ico" src="assets/marks/signetify-icon.svg" alt="Signetify"><div><div class="kick" style="color:{SISTER['accent']}">Sister company</div><h3 style="font-size:1.3rem;margin:.2em 0">{SISTER['name']}™, {SISTER['tagline']}</h3><p class="muted" style="max-width:62ch">The agentic website &amp; storefront builder, live at signetify.com.</p></div><a class="btn btn-ghost" href="signetify.html" style="margin-left:auto;--accent:{SISTER['accent']}">Learn more →</a></div>
 </div></section>
 <section class="band"><div class="wrap"><div class="split">
 <div><div class="kick" style="color:{DIV['velocity']['deep']}">Independent venture · Velocity Quant Technologies</div>
@@ -732,7 +743,7 @@ def build():
 <section><div class="wrap"><div class="sec-head"><div class="kick">Insights</div><h2>From the workshop</h2></div>
 <div class="grid g3">{ins_cards}</div></div></section>
 """
-    page("index.html", "SignetStack Labs: Frontier technology, one proven core", "A house of frontier-technology brands — the Signet Data Trust Network Platform, its specialist brands and Signetify — built on one proven, post-quantum cryptographic core.", home, "home")
+    page("index.html", "SignetStack Labs: Frontier technology, one proven core", "A house of frontier-technology brands — the Signet Data Trust Network Platform, its specialist brands, and independent ventures (Signetify, Velocity, CalibrIQ) — built on one proven, post-quantum cryptographic core.", home, "home")
 
     # COMPANY
     comp = f"""
@@ -969,6 +980,11 @@ def build():
         aud_sec = f'<section><div class="wrap"><div class="sec-head"><div class="kick">Who it\'s for</div><h2>Built for the people who carry the risk</h2></div><div class="aud">{aud}</div></div></section>' if d.get("audience") else ""
         diffs = "".join(f'<div class="cap"><div class="dot">◆</div><h4>{t}</h4><p>{p}</p></div>' for t, p in d.get("diffs", []))
         diff_sec = f'<section class="band"><div class="wrap"><div class="sec-head"><div class="kick">Why it\'s different</div><h2>Hard to replicate, by design</h2></div><div class="grid g3">{diffs}</div></div></section>' if d.get("diffs") else ""
+        editions_sec = ""
+        if d.get("editions"):
+            ed = d["editions"]
+            ecards = "".join(f'<div class="cap"><div class="dot">◆</div><h4>{t}</h4><p>{p}</p></div>' for t, p in ed["items"])
+            editions_sec = f'<section><div class="wrap"><div class="sec-head"><div class="kick">Editions of one engine</div><h2>Revenue lines, not separate products</h2><p class="lead">{ed["intro"]}</p></div><div class="grid g3">{ecards}</div></div></section>'
         fr_html = ""
         for fr in d.get("frontiers", []):
             cards = ""
@@ -992,6 +1008,7 @@ def build():
 <section><div class="wrap"><div class="sec-head"><div class="kick">Capabilities</div><h2>What {d['domain']} delivers</h2></div><div class="grid g3">{caps}</div></div></section>
 {aud_sec}
 {diff_sec}
+{editions_sec}
 {horizon_sec}
 {flagship}
 {tag_sec}
@@ -1021,7 +1038,7 @@ def build():
 <div><div class="kick">Trust</div><h2>When something goes wrong, it stops itself</h2>
 <p class="muted" style="margin-top:.7em">An 18-trigger circuit breaker, a dead-man's switch and continuous capital reconciliation halt trouble automatically. The engine never custodies client funds, capital stays in the institution's own accounts, and access can be revoked instantly. Eighteen months live with zero capital loss attributable to a software defect.</p></div>
 <div><div class="kick">Roadmap</div><h2>Build once, multiply the market</h2>
-<p class="muted" style="margin-top:.7em">The same proven core extends to FX, equities, commodities and indices as interchangeable plugins, extension, not rebuild. The first market pays for the core; every market after is mostly upside.</p></div>
+<p class="muted" style="margin-top:.7em">The same proven core extends to FX, equities, commodities and indices as interchangeable plugins, extension, not rebuild. V5 and its successor generation are versions of this one engine, and each vertical, proprietary, broker, asset-manager, OTC, peer-to-peer, cross-border, market-data and exchange, is an <a href="velocity.html" style="color:var(--accent)">edition of it</a>, not a separate product. The first market pays for the core; every market after is mostly upside.</p></div>
 </div></div></section>
 """
     page("v5-omni.html", "HFT V5 Omni: Velocity Quant Technologies", "The institutional-grade HFT engine behind Velocity Quant Technologies.", omni, "brands", divvars("velocity"))
@@ -1068,7 +1085,7 @@ def build():
 <p class="lead" style="max-width:62ch">{SISTER['blurb'].replace("Signetify","Signetify™",1)}</p>
 <div class="vp">{sig_vp}</div>
 <div class="cta" style="margin-top:30px"><a class="btn btn-primary" href="{SIGNETIFY_URL}" target="_blank" rel="noopener">Visit signetify.com →</a><a class="btn btn-ghost" href="contact.html">Get in touch</a></div>
-<p class="muted" style="margin-top:18px;font-size:.92rem">The no-code website &amp; storefront builder is live at <a href="{SIGNETIFY_URL}" target="_blank" rel="noopener" style="color:var(--accent)">signetify.com</a>. For the enterprise platform underneath it, see <a href="dxp.html" style="color:var(--accent)">SignetStack DXP</a>.</p>
+<p class="muted" style="margin-top:18px;font-size:.92rem">The agentic website &amp; storefront builder is live at <a href="{SIGNETIFY_URL}" target="_blank" rel="noopener" style="color:var(--accent)">signetify.com</a>. For the enterprise platform underneath it, see <a href="dxp.html" style="color:var(--accent)">SignetStack DXP</a>.</p>
 </div></section>
 <section class="band"><div class="wrap"><div class="sec-head"><div class="kick">What it is</div>
 <h2>Build by voice. Refine by hand. Operate by agent.</h2>
